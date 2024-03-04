@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+</head>
+
+<body class="bg-beige">
+
+    <header class="flex justify-between items-center bg-wow-yellow p-0 px-10 h-20">
+        <div class="logo">
+            <a href="Landing.html" class="text-beige no-underline">
+                <h1 class="m-0 text-3xl font-bold">DLSU3PS</h1>
+            </a>
+        </div>
+
+        <nav class="flex">
+            <a href="About.html" class="text-beige no-underline mx-5 hover:text-beige">About</a>
+            <a href="Landing.html" class="text-beige no-underline mx-5 hover:text-beige">Home</a>
+            <a href="" id="profileLink" class="text-beige no-underline mx-5 hover:text-beige">Profile</a>
+            <a href="ForumList.html" class="text-beige no-underline mx-5 hover:text-beige">Forums</a>
+            <a href="Landing.html" class="text-beige no-underline mx-5 hover:text-beige">Logout</a>
+        </nav>
+    </header>
+
+    <div class="flex flex-col justify-center items-center p-5">
+        <div class="overflow-x-auto flex-col">
+            <div class="mb-5 flex flex-row items-center justify-between">
+                <span class="text-5xl font-bold text-burnt-sienna">Whiskers</span>
+                <div class="flex">
+                    <form action="search.html" method="GET">
+                        <button type="submit"
+                            class="mx-2 bg-burnt-sienna p-3 rounded-md font-semibold text-white">Search</button>
+                    </form>
+                </div>
+            </div>
+            <table
+                class="w-full text-sm text-left text-gray-500 table-auto overflow-clip border-solid border-2 border-burnt-sienna">
+                <thead class="text-xs uppercase bg-olive text-beige">
+                    <tr>
+                        <th scope="col" class="pt-5 pb-3 px-6">
+                            Forum
+                        </th>
+                        <th scope="col" class="pt-5 pb-3 px-6">
+                            Latest Post
+                        </th>
+                        <th scope="col" class="pt-5 pb-3 px-6">
+                            Posts
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b-2 border-olive">
+                        <td scope="row" class="p-3 font-medium text-gray-900 flex">
+                            <div class="text-3xl p-5">
+                                🐈
+                            </div>
+                            <a href="View-Post-Whiskers.html">
+                            <div class="flex-col">
+                                <div class="font-medium text-olive">
+                                    A Sunny Afternoon with Whiskers
+                                </div>
+                                <div
+                                    class="font-small text-dim-gray font-normal line-clamp-2">
+                                    Guys, nakita ko si Whiskers kanina, she was totally enjoying the sun sa tabi ng library. Grabe, she loves the attention talaga! Every time may dadaan, pause siya and look with her charming eyes. Parang she’s saying, 'I know I’m cute, no need to tell me.' Super adorable! If you're around, try to spot her and maybe snap a pic. She’s becoming a bit of a campus celeb, eh?
+                                </div>
+                            </div>
+                            </a>
+                        </td>
+                        <td class="py-4 px-6 overflow-hidden overflow-ellipsis">
+                            <a href="Profile-Sam.html">
+                            <div class="flex">
+                                <div class="flex-col">
+                                    <div class="font-semi text-burnt-sienna">
+                                        by SammiePaws
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </td>
+                        <td class="py-4 px-6">
+                            2
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

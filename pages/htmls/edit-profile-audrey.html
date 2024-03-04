@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - AudreyHeartsCats</title>
+    <link href="output.css" rel="stylesheet">
+</head>
+<body class="bg-beige font-sans">
+    <div class="max-w-4xl mx-auto p-5">
+        <h1 class="text-2xl font-bold text-dim-gray mb-6">Edit Profile</h1>
+
+        <div class="flex flex-col md:flex-row md:items-center rounded-lg overflow-hidden">
+            <div class="md:flex-shrink-0">
+                <div class="h-48 w-full md:w-48 bg-dim-gray" style="background-image: url('path/to/generic-cat-silhouette.jpg'); background-size: cover;"></div>
+            </div>
+            <div class="p-8">
+                <div class="uppercase tracking-wide text-sm text-olive font-semibold">AudreyHeartsCats</div>
+                <a href="" id="profileLink" class="text-beige no-underline mx-5 hover:text-beige">Profile</a>                <p class="mt-2 text-gray-500">Marketing guru with a soft spot for stray cats. Believer in kindness and cat cuddles.</p>
+                <div class="flex mt-5">
+                    <button class="mr-3 bg-burnt-sienna hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Upload Profile Picture
+                    </button>
+                    <button class="bg-burnt-sienna hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                Email Address
+            </label>
+            
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email Address" value="audrey@catmarketing.com">
+        </div>
+
+        <div class="mt-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="about">
+                About Me
+            </label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="about" placeholder="Tell us about yourself">Marketing guru with a soft spot for stray cats. Believer in kindness and cat cuddles.</textarea>
+        </div>
+
+        <div class="mt-4 mb-8">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="catto">
+                Favorite Catto
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="catto" type="text" placeholder="Your favorite catto" value="Socks">
+        </div>
+
+        <div class="flex items-center justify-between">
+            <form action="ForumList.html">
+                <button class="bg-burnt-sienna hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="./output.css" rel="stylesheet">
+    <script src="login-store.js"></script>
+</head>
+<body class="bg-beige font-roboto m-0 p-0 h-screen flex flex-col">
+
+    <header class="flex h-20 items-center justify-between p-0 px-10 bg-wow-yellow">
+        <a href="Landing.html" class="text-beige no-underline">
+            <h1 class="text-3xl font-bold m-0">DLSU3PS</h1>
+        </a>
+        <nav class="flex">
+            <a href="About.html" class="text-beige no-underline mx-5 hover:text-beige">About</a>
+            <a href="Login.html" class="text-beige no-underline mx-5 hover:text-beige">Login</a>
+            <a href="SignUp.html" class="text-beige no-underline mx-5 hover:text-beige">Sign-up</a>
+        </nav>
+    </header>
+    <div class="flex justify-evenly items-center h-screen px-10">
+        <div class="flex-grow">
+            <h1 class="text-8xl text-green font-black text-olive">Welcome To DLSU3PS</h1>
+        </div>
+        <div class="w-6/12">
+            <div class="flex flex-col bg-burnt-sienna rounded-lg p-6 gap-4">
+                <input id="usernameInput" type="text" placeholder="Username..." class="py-2.5 px-3.5 rounded-lg">
+                <input type="password" placeholder="Password..." class="py-2.5 px-3.5 rounded-lg">
+                <div class="flex justify-between items-center">
+                    <a href="SignUp.html" class="text-beige hover:underline">Not Registered? Sign-up</a>
+                    <button id="loginButton" class="py-2.5 px-3.5 bg-olive text-white font-bold rounded-lg">Enter</button>
+                </div>
+            </div>
+        </div>        
+    </div>
+</body>
+</html>
