@@ -1,12 +1,23 @@
 import React from 'react';
 import ForumPosts from "./ForumPosts.jsx";
+import NavBar from './NavBar.jsx';
 
 function ForumPage() {
     
     //temporary
     const posts = [
-        { forumName: 'Discussions about the most notorious cat in the campus.', forumDesc: 'Met him noon sa CADS (not hensy!!) and kinalmot niya ako, went to the clinic a few days later',
-    lastPostPic: '../public/images/catuser0.png', lastPostName: '[ADMIN] NO POSTING OF NANGANGALMOT INCIDENCES', lastPostAuthor : 'ADMIN#1', lastPostUpvotes : 2, lastPostDownvotes : 1 },
+        { forumName: 'Discussions about the most notorious cat in the campus.',
+            forumDesc: 'Met him noon sa CADS (not hensy!!) ' +
+                'and kinalmot niya ako, went to the clinic a few days later',
+            lastPostPic: '../public/images/catuser0.png',
+            lastPostName: '[ADMIN] NO POSTING OF NANGANGALMOT INCIDENCES',
+            lastPostAuthor : 'ADMIN#1', lastPostUpvotes : 2, lastPostDownvotes : 1 },
+        { forumName: 'Discussions about the most notorious cat in the campus.',
+            forumDesc: 'Met him noon sa CADS (not hensy!!) ' +
+                'and kinalmot niya ako, went to the clinic a few days later',
+            lastPostPic: '../public/images/catuser0.png',
+            lastPostName: '[ADMIN] NO POSTING OF NANGANGALMOT INCIDENCES',
+            lastPostAuthor : 'ADMIN#1', lastPostUpvotes : 555, lastPostDownvotes : 1 },
 
         // add here?
     ];
