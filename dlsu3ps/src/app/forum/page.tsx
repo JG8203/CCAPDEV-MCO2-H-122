@@ -1,6 +1,8 @@
 import React from 'react';
 import NavBar from '@/components/NavBar';
 import TopicBox from '@/components/topics/TopicBox';
+import {topics, posts, users} from '@/app/api/data';
+
 
 export default function ForumPage() {
 

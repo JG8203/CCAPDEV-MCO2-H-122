@@ -1,4 +1,5 @@
 export default ForumPosts;
+import topics from '..';
 
 function ForumPosts({ posts }) { // wtf are types anyway
     return (
