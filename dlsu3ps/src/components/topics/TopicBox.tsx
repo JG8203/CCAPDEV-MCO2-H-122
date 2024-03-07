@@ -13,12 +13,3 @@ export default function TopicBox({topic}:{topic: Topic}) {
     
   )
 }
-/*
-<table>
-(stuff here such as headers etc.)
-subtopics.map((subtopic) => (
-   <SubtopicRow subtopic={subtopic} /> (td object ito)
-))
-</table>
-// definition ng subtopic row
-*/

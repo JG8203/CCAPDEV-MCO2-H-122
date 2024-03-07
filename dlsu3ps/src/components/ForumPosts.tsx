@@ -68,7 +68,7 @@ function ForumPosts({ posts }) { // wtf are types anyway
                                         {post.lastPostUpvotes}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {post.lastPostDOwnvotes}
+                                        {post.lastPostDownvotes}
                                     </td>
                                 </tr>
                             ))}
@@ -130,7 +130,7 @@ function ForumPosts({ posts }) { // wtf are types anyway
                                         {post.lastPostUpvotes}
                                     </td>
                                     <td className="py-4 px-6">
-                                        {post.lastPostDOwnvotes}
+                                        {post.lastPostDownvotes}
                                     </td>
                                 </tr>
                             ))}
