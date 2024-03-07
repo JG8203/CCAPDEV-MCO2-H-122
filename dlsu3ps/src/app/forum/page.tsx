@@ -75,7 +75,9 @@ export default function ForumPage() {
     return (
         <div className="bg-beige font-roboto text-base text-gray-800 align-center min-h-screen flex flex-col w-full">
             <NavBar />
-            <TopicBox />
+            {topics.map(topic => (
+                <TopicBox key={topic._id} topic={topic} />
+            ))}
         </div>
     );
 }

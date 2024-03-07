@@ -1,4 +1,4 @@
-export default function SubtopicTable() {
+export default function SubtopicTable({subtopics}) {
   return (
     <>
     <table
