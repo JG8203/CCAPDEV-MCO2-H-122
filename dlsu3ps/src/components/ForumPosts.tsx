@@ -1,8 +1,6 @@
-import React from 'react';
 export default ForumPosts;
 
-//This is for the posts in the ForumPage
-function ForumPosts({ posts }) {
+function ForumPosts({ posts }) { // wtf are types anyway
     return (
         <div className="" >
             <div className="flex flex-col justify-center items-center p-5">
@@ -35,7 +33,7 @@ function ForumPosts({ posts }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {posts.map((post, index) => (
+                            {posts.map((post, index) => ( // ikaw ang type ko ayie <3
                                 <tr key={index} className="border-b-2 border-olive">
                                     <td scope="row" className="p-2 font-medium text-gray-900 flex">
                                         <div className="text-5xl p-5">
@@ -65,10 +63,10 @@ function ForumPosts({ posts }) {
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6">
+                                    <td className="py-4 px-6">
                                         {post.lastPostUpvotes}
                                     </td>
-                                    <td class="py-4 px-6">
+                                    <td className="py-4 px-6">
                                         {post.lastPostDOwnvotes}
                                     </td>
                                 </tr>
@@ -97,7 +95,7 @@ function ForumPosts({ posts }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {posts.map((post, index) => (
+                            {posts.map((post, index) => ( //not u tho
                                 <tr key={index} className="border-b-2 border-olive">
                                     <td scope="row" className="p-3 font-medium text-gray-900 flex">
                                         <div className="text-3xl p-5">
@@ -127,10 +125,10 @@ function ForumPosts({ posts }) {
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6">
+                                    <td className="py-4 px-6">
                                         {post.lastPostUpvotes}
                                     </td>
-                                    <td class="py-4 px-6">
+                                    <td className="py-4 px-6">
                                         {post.lastPostDOwnvotes}
                                     </td>
                                 </tr>
