@@ -1,4 +1,4 @@
-import { Subtopic, Topic } from './topics.types'
+import { Subtopic, Topic } from '../../app/api/topics.types'
 
 //export default function VotesColumn({subtopicVotes}: {subtopicVotes: Number}) {
 //{subtopicVotes.toString()}

@@ -1,4 +1,3 @@
-import { Subtopic, Topic } from './topics.types'
 
 //export default function ThreadsColumn({subtopicThreads}: {subtopicThreads: Number}) {
 //{subtopicThreads.toString()}

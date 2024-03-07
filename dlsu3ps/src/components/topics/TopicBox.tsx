@@ -1,6 +1,6 @@
 import SubtopicTable from './SubtopicTable'
-import TopicHeader from './TopicHeader'
-import { Topic } from './topics.types'
+import TopicHeader from '../TopicHeader'
+import { Topic } from '../../app/api/topics.types'
 
 export default function TopicBox({topic}:{topic: Topic}) {
   return (

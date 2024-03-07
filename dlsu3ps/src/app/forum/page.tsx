@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '@/components/NavBar';
-import TopicBox from '@/components/topics/TopicBox';
+import TopicBox from '@/components/Topics/TopicBox';
 import {topics, posts, users} from '@/app/api/data';
 
 
@@ -10,7 +10,7 @@ export default function ForumPage() {
     const topics = [
         {
             "_id": "3a5cc8a0-5b31-4195-ba4c-60b4899a86f2",
-            "name": "General Forums",
+            "name": "Top Cattos",
             "subtopics": [
                 {
                     "_id": "ce309956-ad50-40e2-8e6c-545812c57ef9",

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NavBar() {
     return (
-        <header className="flex h-20 justify-between items-center bg-wow-yellow p-0 px-10">
+        <header className="flex h-20 justify-between items-center bg-wow-yellow p-0 px-10 sticky top-0 left-0">
             <div className="logo">
                 <Link href="/" className="text-beige no-underline">
                     <h1 className="m-0 text-3xl font-bold">DLSU3PS</h1>
