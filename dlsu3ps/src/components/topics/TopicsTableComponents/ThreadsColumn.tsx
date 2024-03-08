@@ -1,6 +1,3 @@
-
-//export default function ThreadsColumn({subtopicThreads}: {subtopicThreads: Number}) {
-//{subtopicThreads.toString()}
 export default function ThreadsColumn() {
     return (        
         <td className="py-4 px-6">

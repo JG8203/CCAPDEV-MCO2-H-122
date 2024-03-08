@@ -1,13 +1,19 @@
-import { Post } from "@/app/api/topics.types";
+// ForumRow.tsx
+import { Post } from '@/app/api/topics.types';
+import Link from 'next/link';
 
-export default function ForumRow({ post }: { post: Post }) {
+// Add subtopicId to the props
+export default function ForumRow({ post, subtopicId }: { post: Post; subtopicId: string }) {
     const commentsCount = post.comments.length + 1;
     return (
+        <>
         <tr className="border-b-2 border-olive">
         <td className="p-3 font-medium text-gray-900 flex">
             <div className="text-3xl p-5">📄</div>
             <div className="flex-col">
-                <div className="font-medium text-olive">{post.title}</div>
+                <div className="font-medium text-olive">
+                    <Link href={`/forum/subtopic/${subtopicId}/post/${post._id}`}>{post.title}</Link>
+                </div>
                 <div className="font-small text-dim-gray font-normal line-clamp-2">
                     {post.content.substring(0, 100)}...
                 </div>
@@ -20,6 +26,6 @@ export default function ForumRow({ post }: { post: Post }) {
             {commentsCount}
         </td>
     </tr>
-  );
+    </>
+    );
 }
-  

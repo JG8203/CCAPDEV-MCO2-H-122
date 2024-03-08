@@ -1,7 +1,8 @@
+// ForumTable.tsx
 import { Post } from '@/app/api/topics.types';
 import ForumRow from './ForumRow';
 
-export default function ForumTable({ posts }:{ posts: Post[] }) {
+export default function ForumTable({ posts, subtopicId }: { posts: Post[]; subtopicId: string }) {
   return (
     <table className="w-full text-sm text-left text-gray-500 table-auto overflow-clip border-solid border-2 border-burnt-sienna">
       <thead className="text-xs uppercase bg-olive text-beige">
@@ -12,8 +13,9 @@ export default function ForumTable({ posts }:{ posts: Post[] }) {
         </tr>
       </thead>
       <tbody>
-        {posts.map((post:Post) => (
-          <ForumRow key={post._id} post={post} />
+        {posts.map((post) => (
+          // Pass subtopicId to each ForumRow
+          <ForumRow key={post._id} post={post} subtopicId={subtopicId} />
         ))}
       </tbody>
     </table>

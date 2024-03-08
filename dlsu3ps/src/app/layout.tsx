@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/NavBar";
 
 export const metadata: Metadata = {
   title: "DLSU3PS",
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-beige">{children}</body>
+      <body className="bg-beige">
+      <NavBar />
+        {children}
+      </body>
     </html>
   );
 }

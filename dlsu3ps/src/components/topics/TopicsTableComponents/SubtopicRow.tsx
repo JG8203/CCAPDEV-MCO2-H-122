@@ -1,7 +1,7 @@
 import { Subtopic, Topic } from '../../../app/api/topics.types'
 import LatestPostColumn from './LatestPostColumn'
-import ThreadsColumn from '../ThreadsColumn'
-import VotesColumn from '../VotesColumn'
+import ThreadsColumn from './ThreadsColumn'
+import VotesColumn from './VotesColumn'
 import SubtopicColumn from './SubtopicColumn'
 import Link from 'next/link'
 

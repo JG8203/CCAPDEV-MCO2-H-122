@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '@/components/NavBar';
+
 import TopicBox from '@/components/Topics/TopicBox';
 import {topics, posts, users} from '@/app/api/data';
 
@@ -84,7 +84,6 @@ export default function ForumPage() {
 
     return (
         <div className="bg-beige font-roboto text-base text-gray-800 align-center min-h-screen flex flex-col w-full">
-            <NavBar />
             {topics.map(topic => (
                 <TopicBox key={topic._id} topic={topic} />
             ))}

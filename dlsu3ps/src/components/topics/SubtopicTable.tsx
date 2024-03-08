@@ -1,4 +1,4 @@
-import SubtopicRow from './TableComponents/SubtopicRow'
+import SubtopicRow from '@/components/Topics/TopicsTableComponents/SubtopicRow'
 import { Subtopic } from "../../app/api/topics.types";
 
 export default function SubtopicTable({ subtopics }: { subtopics: Subtopic[] }) {

@@ -35,3 +35,15 @@ export interface Post {
     comments: Comment[];
     subtopicId: string;
 }
+
+export interface User {
+    _id: string;
+    username: string;
+    email: string;
+    passwordHash: string;
+    profilePicture: string;
+    bio: string;
+    createdAt: string;
+    lastActive: string;
+    roles: string[];
+}
