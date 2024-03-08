@@ -5,7 +5,7 @@ export default function TableHeader({ topicName }:{topicName: string}) {
       <div className="flex">
         <form action="search.html" method="GET">
           <button type="submit"
-            className="mx-2 bg-burnt-sienna p-3 rounded-md font-semibold text-white">Search</button>
+            className="mx-2 bg-burnt-sienna p-3 hover:bg-orange-800 rounded-md font-semibold text-white hover:text-slate-200">Search</button>
         </form>
       </div>
     </div>

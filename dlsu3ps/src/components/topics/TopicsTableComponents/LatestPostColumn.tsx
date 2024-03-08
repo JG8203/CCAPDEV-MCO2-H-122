@@ -9,10 +9,10 @@ export default function LatestPostColumn() {
               <img src={"../dlsu3ps/public/image/users/catuser0.png"} />
             </div>
             <div className="flex-col">
-              <div className="font-semibold text-olive">
+              <div className="font-semibold text-olive hover:text-gray-800">
                 [ADMIN] NO POSTING OF NANGANGALMOT INCIDENCES
               </div>
-              <div className="font-semi text-burnt-sienna">
+              <div className="font-semi text-burnt-sienna hover:text-gray-800">
                 by ADMIN#1
               </div>
             </div>

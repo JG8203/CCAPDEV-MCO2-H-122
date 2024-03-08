@@ -1,3 +1,4 @@
+import PostContent from './PostContent';
 import Comment from './Comment';
 
 export default function CommentsSection({ comments }) {

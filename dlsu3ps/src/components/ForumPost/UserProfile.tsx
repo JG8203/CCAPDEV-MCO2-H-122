@@ -18,6 +18,7 @@ export default function UserProfile({ author, profileImageUrl, joinDate }: UserP
             alt=""
             layout="fill"
             objectFit="cover"
+            className="w-34 h-34"
           />
       </div>
       <div className="font-small text-dim-gray font-normal">Joined {joinDate}</div>
