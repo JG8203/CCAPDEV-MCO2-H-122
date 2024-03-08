@@ -1,7 +1,6 @@
-import { Subtopic, Topic } from '../../../app/api/topics.types'
+import { Post, Subtopic, Topic } from '../../../app/api/topics.types'
 
-//export default function LatestPostColumn({subtopic}: {subtopic: Subtopic}) {
-export default function LatestPostColumn() {
+export default function LatestPostColumn({ post }: { post: Post }) {
     return (
         <td className="py-4 px-6 overflow-hidden overflow-ellipsis">
           <a href="View-Post-Snowflake.html" className="flex items-center no-underline text-gray-900">
@@ -10,10 +9,10 @@ export default function LatestPostColumn() {
             </div>
             <div className="flex-col">
               <div className="font-semibold text-olive hover:text-gray-800">
-                [ADMIN] NO POSTING OF NANGANGALMOT INCIDENCES
+                {post.title}
               </div>
               <div className="font-semi text-burnt-sienna hover:text-gray-800">
-                by ADMIN#1
+                by {post.authorId}
               </div>
             </div>
           </a>
