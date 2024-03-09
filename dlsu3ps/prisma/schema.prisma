@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Comment {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorId String   @db.ObjectId
+  content  String
+  date     DateTime @db.Date
+  postId   String   @db.ObjectId
+}
+
+model Post {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorId   String   @db.ObjectId
+  content    String
+  date       DateTime @db.Date
+  downvotes  String[] @db.ObjectId
+  subtopicId String   @db.ObjectId
+  title      String
+  upvotes    String[] @db.ObjectId
+}
+
+model Subtopic {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  desc    String
+  name    String
+  topicId String @db.ObjectId
+}
+
+model Topic {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+}
+
+model Account {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String  @unique @db.ObjectId
+  favoriteCat  String? @map("favorite_cat")
+  profileImage String? @map("profile_image")
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  kindeId   String   @unique
+  email     String   @unique
+  firstName String
+  lastName  String
+  account   Account?
+}

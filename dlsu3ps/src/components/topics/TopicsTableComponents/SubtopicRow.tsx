@@ -9,11 +9,11 @@ export default function SubtopicRow({subtopic}: {subtopic: Subtopic}) {
     //find posts with same id as subtopic id
     const subPosts = posts.map(post => post._id === subtopic.topicId);
     //find latest
-    const lastPost = subPosts.find(post => );
+    // const lastPost = subPosts.find(post => );
     return (
     <tr className="border-b-2 border-olive">
         <SubtopicColumn subtopic={subtopic} />
-        <LatestPostColumn post={lastPost} />
+        {/*<LatestPostColumn post={lastPost} />*/}
         <ThreadsColumn />
         <VotesColumn />
     </tr>
