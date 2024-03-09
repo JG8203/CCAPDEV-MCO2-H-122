@@ -11,7 +11,7 @@ export default function UserPostsRow({ post }: { post: Post }) {
                 </div>
                 <div className="flex-col">
                     <div className="font-medium text-olive">
-                        <a href="View-Post-Ginger.html" className="font-medium text-olive">{post.title}</a>
+                        <div className="font-medium text-olive">{post.title}</div>
                     </div>
                     <div className="font-small text-dim-gray font-normal">
                         {post.content}
