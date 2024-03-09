@@ -10,7 +10,7 @@ export default function NavBar() {
             </div>
 
             <nav className="flex">
-                <Link href="/userpage" className="text-beige no-underline mx-5 hover:text-gray-800">Profile</Link>
+                <Link href="/profile" className="text-beige no-underline mx-5 hover:text-gray-800">Profile</Link>
                 <a href="#" className="text-beige no-underline mx-5 hover:text-gray-800">Logout</a>
                 <Link href="/about" className="text-beige no-underline mx-5 hover:text-gray-800">About</Link>
                 <Link href="/forum" className="text-beige no-underline mx-5 hover:text-gray-800">Forums</Link>

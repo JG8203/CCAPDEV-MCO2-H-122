@@ -6,14 +6,14 @@ import SubtopicColumn from './SubtopicColumn'
 import {posts} from '@/app/api/data';
 
 export default function SubtopicRow({subtopic}: {subtopic: Subtopic}) {
+    //find posts with same id as subtopic id
+    const subPosts = posts.map(post => post._id === subtopic.topicId);
+    //find latest
+    const lastPost = subPosts.find(post => );
     return (
     <tr className="border-b-2 border-olive">
         <SubtopicColumn subtopic={subtopic} />
-        {/*
-        {posts.map(post => (
-          <LatestPostColumn key={subtopic._id} post={post} />
-        ))}*/}
-        <LatestPostColumn />
+        <LatestPostColumn post={lastPost} />
         <ThreadsColumn />
         <VotesColumn />
     </tr>
