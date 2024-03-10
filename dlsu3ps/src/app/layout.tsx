@@ -16,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-beige">
-      <NavBar />
-        {children}
+        <NavBar />
+        <div className="max-h-screen z-10">
+          {children}
+        </div>
       </body>
     </html>
   );

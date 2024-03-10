@@ -11,13 +11,13 @@ export default function SubtopicColumn({ subtopic }: { subtopic: Subtopic }) {
         </div>
         <div className="flex-col">
           <div className="font-medium text-olive hover:text-gray-800">
-            <Link href={`/forum/subtopic/${subtopic._id}`}>{subtopic.name}</Link>
+            <Link href={`/forum/subtopic/${subtopic.id}`}>{subtopic.name}</Link>
           </div>
           <div className="font-small text-dim-gray font-normal hover:text-gray-800">
-            <Link href={`/forum/subtopic/${subtopic._id}`}>{subtopic.description}</Link>
+            <Link href={`/forum/subtopic/${subtopic.id}`}>{subtopic.desc}</Link>
           </div>
         </div>
       </div>
-    </td>
+  </td>
   )
 }

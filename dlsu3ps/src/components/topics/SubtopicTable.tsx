@@ -23,7 +23,7 @@ export default function SubtopicTable({ subtopics }: { subtopics: Subtopic[] }) 
       </thead>
       <tbody>
         {subtopics.map(subtopic => (
-          <SubtopicRow key={subtopic._id} subtopic={subtopic} />
+          <SubtopicRow key={subtopic.id} subtopic={subtopic} />
         ))}
       </tbody>
     </table>

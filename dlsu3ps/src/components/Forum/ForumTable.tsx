@@ -14,8 +14,7 @@ export default function ForumTable({ posts, subtopicId }: { posts: Post[]; subto
       </thead>
       <tbody>
         {posts.map((post) => (
-          // Pass subtopicId to each ForumRow
-          <ForumRow key={post._id} post={post} subtopicId={subtopicId} />
+          <ForumRow key={post.id} post={post} subtopicId={subtopicId} />
         ))}
       </tbody>
     </table>

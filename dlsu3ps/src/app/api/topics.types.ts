@@ -1,49 +1,46 @@
 export interface Subtopic {
-    _id: string;
+    id: string;
     name: string;
+    desc: string; // Assuming 'description' maps to 'desc' in the schema
     topicId: string;
-    description?: string;
 }
 
 export interface Topic {
-    _id: string;
+    id: string;
     name: string;
     subtopics: Subtopic[];
 }
 
 export interface Comment {
-    _id: string;
-    content: string;
+    id: string;
     authorId: string;
-    date: string;
-    editDate: string | null;
-    deleted: boolean;
-    upvotes: string[];
-    downvotes: string[];
+    content: string;
+    date: Date; // Changed string to Date for DateTime type
+    postId: string; // Reference to the Post it belongs to
+    // Removed fields not present in the given schema
 }
 
 export interface Post {
-    _id: string;
-    title: string;
-    content: string;
+    id: string;
     authorId: string;
-    date: string;
-    editDate: string | null;
-    upvotes: string[];
+    content: string;
+    date: Date;
     downvotes: string[];
-    status: string;
-    comments: Comment[];
     subtopicId: string;
+    title: string;
+    upvotes: string[];
+    comments: Comment[]; 
 }
 
 export interface User {
-    _id: string;
-    username: string;
+    id: string;
+    kindeId: string; // Unique identifier
     email: string;
-    passwordHash: string;
-    profilePicture: string;
-    bio: string;
-    createdAt: string;
-    lastActive: string;
-    roles: string[];
+    firstName: string;
+    lastName: string;
+    favoriteCat?: string; // Optional field for the user's favorite cat
+    profileImage?: string; // Optional field for the user's profile image
+    posts: Post[]; // Relationship to Posts
+    createdAt: Date; // Changed string to Date for DateTime type
+    // Removed fields not present in the given schema
 }

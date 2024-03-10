@@ -1,6 +1,7 @@
 import {PrismaClient} from "@prisma/client";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
 import {NextResponse} from "next/server";
+import { generateFromEmail, generateUsername } from "unique-username-generator";
 
 const prisma = new PrismaClient();
 
@@ -21,7 +22,9 @@ export async function GET() {
                 kindeId: user.id,
                 firstName: user.given_name ?? "",
                 lastName: user.family_name ?? "",
-                email: user.email ?? "" // Using nullish coalescing operator to provide a default empty string value
+                email: user.email ?? "",
+                username: generateFromEmail(user.email ?? ""),
+                profileImage: "@/public/images/users/catuser0.png",
             }
         });
     }

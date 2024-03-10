@@ -7,7 +7,7 @@ import {posts} from '@/app/api/data';
 
 export default function SubtopicRow({subtopic}: {subtopic: Subtopic}) {
     //find posts with same id as subtopic id
-    const subPosts = posts.map(post => post._id === subtopic.topicId);
+    const subPosts = posts.map(post => post.subtopicId === subtopic.topicId);
     //find latest
     // const lastPost = subPosts.find(post => );
     return (

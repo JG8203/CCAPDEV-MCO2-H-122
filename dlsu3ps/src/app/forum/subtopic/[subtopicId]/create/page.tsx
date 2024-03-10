@@ -1,22 +1,72 @@
-export default function CreatePost() {
+import prisma from "@/app/lib/prisma";
+import { redirect } from "next/navigation";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
+export default async function CreatePost({params}: {params: {subtopicId: string}}) {
+    const {getUser} = getKindeServerSession();
+    const userObject = await getUser();
+    const kindeId = userObject?.id;
+    async function formAction(formData: FormData) {
+        "use server";
+
+        const title = formData.get('title');
+        const content = formData.get('content');
+        const subtopicId = params.subtopicId;
+        
+        try {
+            const user = await prisma.user.findUnique({
+                where: {
+                    kindeId: kindeId!,
+                },
+            });
+            const post = await prisma.post.create({
+                data: {
+                    title: title as string,
+                    content: content as string,
+                    authorId: user?.id!,
+                    subtopicId: subtopicId,
+                },
+            });
+        } catch (error) {
+            console.error('Failed to create post:', error);
+        } finally {
+            redirect(`/forum/subtopic/${subtopicId}`);
+        }
+    }
     return (
-        <div>
+        <form action={formAction}>
             <div className="text-4xl font-bold text-burnt-sienna p-5">
                 Create Thread
             </div>
             <div className="flex flex-col p-5">
-                <label className="text-2xl py-3 font-semibold" htmlFor="post-title">Title</label>
-                <input className="bg-white appearance-none border-2 border-dim-gray rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-olive" id="post-title" type="text" placeholder="Where is Casper?" />
+                <label htmlFor="post-title" className="text-2xl py-3 font-semibold">Title</label>
+                <input
+                    className="bg-white appearance-none border-2 border-dim-gray rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna"
+                    name="title"
+                    type="title"
+                    placeholder="Where is Casper?"
+                    required
+                    minLength={5}
+                />
             </div>
             <div className="flex flex-col p-5">
-                <label className="text-2xl py-3 font-semibold" htmlFor="post-title"></label>
-                <textarea className="bg-white appearance-none border-2 border-dim-gray rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-olive" id="post-title" rows={20}></textarea>
+                <label htmlFor="post-content" className="text-2xl py-3 font-semibold">Content</label>
+                <textarea
+                    className="bg-white appearance-none border-2 border-dim-gray rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna"
+                    name="content"
+                    rows={20}
+                    required
+                    minLength={20}
+                ></textarea>
             </div>
             <div className="w-full flex justify-end">
-                <button className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline m-5" type="button">
+                <button
+                    className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline m-5"
+                    type="submit"
+                >
                     Create Post
                 </button>
             </div>
-        </div>
+        </form>
     );
 }
