@@ -24,7 +24,7 @@ export async function GET() {
                 lastName: user.family_name ?? "",
                 email: user.email ?? "",
                 username: generateFromEmail(user.email ?? ""),
-                profileImage: "@/public/images/users/catuser0.png",
+                profileImage: "/images/users/catuser0.png",
             }
         });
     }
