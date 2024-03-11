@@ -1,6 +1,6 @@
 import ForumHeader from './Forum/ForumHeader';
 import ForumTable from './Forum/ForumTable';
-import { Post, Subtopic } from '@/app/api/topics.types';
+import { Post, Subtopic } from '@prisma/client';
 
 export default function ForumBox({ subtopic, posts }: { subtopic: Subtopic; posts: Post[] }) {
   return (

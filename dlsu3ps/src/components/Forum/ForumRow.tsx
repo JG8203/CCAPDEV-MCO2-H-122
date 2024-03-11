@@ -1,8 +1,8 @@
 // ForumRow.tsx
-import { Post } from '@/app/api/topics.types';
+import { Post } from '@prisma/client';
 import Link from 'next/link';
 import prisma from '@/app/lib/prisma';
-
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 async function getPostCommentsCount(postId: string) {
     const postWithCommentsCount = await prisma.post.findUnique({
       where: {

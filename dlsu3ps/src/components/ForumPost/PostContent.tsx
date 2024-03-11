@@ -4,7 +4,7 @@ interface PostContentProps {
 
 const PostContent: React.FC<PostContentProps> = ({ children }) => {
     return (
-        <div className="post-content py-4 px-6 overflow-hidden flex flex-col">
+        <div className="post-content py-4 px-6 overflow-hidden flex flex-col w-full">
             <p className="text-black">{children}</p>
         </div>
     );

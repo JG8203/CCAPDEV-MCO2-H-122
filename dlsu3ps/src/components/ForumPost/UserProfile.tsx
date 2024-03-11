@@ -5,7 +5,7 @@ import Image from "next/image";
 interface UserProfileProps {
   author: string;
   profileImageUrl: string;
-  joinDate: string;
+  joinDate: Date;
 }
 
 export default function UserProfile({ author, profileImageUrl, joinDate }: UserProfileProps) {
@@ -21,7 +21,7 @@ export default function UserProfile({ author, profileImageUrl, joinDate }: UserP
             className="w-34 h-34"
           />
       </div>
-      <div className="font-small text-dim-gray font-normal">Joined {joinDate}</div>
+      <div className="font-small text-dim-gray font-normal">Joined {joinDate.toDateString()}</div>
     </div>
   );
 }

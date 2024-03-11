@@ -1,7 +1,7 @@
 import PostContent from './PostContent';
-import Comment from './Comment';
+import { Comment } from '@prisma/client';
 
-export default function CommentsSection({ comments }) {
+export default function CommentsSection({ comments } : { comments: Comment[] }) {
   return (
     <div>
       {comments.map(comment => (

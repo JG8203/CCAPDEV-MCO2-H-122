@@ -1,8 +1,8 @@
-import { Post } from '@/app/api/topics.types';
+import type { Post } from '@prisma/client'
 import Link from 'next/link';
 
-// Add subtopicId to the props
 export default function UserPostsRow({ post }: { post: Post }) {
+    console.log(post);
     return (
         <tr className="border-b-2 border-olive">
             <td scope="row" className="p-2 font-medium text-gray-900 flex">
@@ -11,13 +11,13 @@ export default function UserPostsRow({ post }: { post: Post }) {
                 </div>
                 <div className="flex-col">
                     <div className="font-medium text-olive">
-                        <div className="font-medium text-olive">{post.title}</div>
+                        <Link href={`/forum/subtopic/${post.subtopicId}/post/${post.id}`} className="font-medium text-olive">{post.title}</Link>
                     </div>
-                    <div className="font-small text-dim-gray font-normal">
+                    <div className="font-small text-dim-gray font-normal line-clamp-2">
                         {post.content}
                     </div>
                     <div className="font-light italic mt-3">
-                        {post.date}
+                        {post.date?.toString() || 'No date'}
                     </div>
                 </div>
             </td>

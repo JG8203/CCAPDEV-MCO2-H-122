@@ -14,19 +14,21 @@ model Comment {
   date     DateTime @db.Date
   postId   String   @db.ObjectId
   post     Post     @relation(fields: [postId], references: [id])
+  isDeleted Boolean  @default(false) @map("is_deleted")
 }
 
 model Post {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   authorId   String    @db.ObjectId
   content    String
-  date       DateTime? @default(now()) @map("created_at")
+  date       DateTime  @default(now()) @map("date")
   downvotes  String[]  @db.ObjectId
   subtopicId String    @db.ObjectId
   title      String
   upvotes    String[]  @db.ObjectId
   user       User      @relation(fields: [authorId], references: [id])
   comments   Comment[]
+  isDeleted  Boolean   @default(false) @map("is_deleted")
 }
 
 model Subtopic {
@@ -54,4 +56,5 @@ model User {
   posts        Post[]
   createdAt    DateTime @default(now()) @map("created_at")
   username     String   @unique
+  bio          String?   @default("")
 }
