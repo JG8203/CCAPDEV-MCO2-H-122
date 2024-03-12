@@ -11,7 +11,8 @@ export default async function Page({ params }: { params: { userId: string } }) {
   });
   const userPosts = await prisma.post.findMany({
     where: {
-      authorId: params.userId
+      authorId: params.userId,
+      isDeleted: false
     }
   });
 

@@ -9,9 +9,15 @@ export default function UserPostsTable({ posts }: { posts: Post[] }) {
                 <UserPostsHeader />
                 <tbody>
                     <div className="overflow-y-scroll max-h-96">
-                    {posts.map(post => (
-                        <UserPostsRow post={post} key={post.id}/>
-                    ))}
+                    {posts.length === 0 ? (
+                        <tr>
+                            <td colSpan={3} className="text-center">User has no posts</td>
+                        </tr>
+                    ) : (
+                        posts.map(post => (
+                            <UserPostsRow post={post} key={post.id}/>
+                        ))
+                    )}
                     </div>
                 </tbody>
             </table>

@@ -68,3 +68,9 @@ export default async function Page({ params }: { params: { subtopicId: string, p
         </main>
     );
 }
+
+function wait(duration: number) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, duration);
+    });
+}
