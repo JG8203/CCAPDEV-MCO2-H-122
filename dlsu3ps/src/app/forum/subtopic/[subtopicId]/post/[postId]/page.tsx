@@ -8,7 +8,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import EditDelete from '@/components/ForumPost/EditDelete';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
-
+import { Comment as CommentType } from '@prisma/client';
+import EditDeleteComment from "@/components/ForumPost/EditDeleteComment";
 async function getPost(postId: string) {
     const post = await prisma.post.findUnique({
         where: { id: postId },
@@ -61,7 +62,34 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                 <PostContent>{fetchedPost.content}</PostContent>
                             </div>
                         </section>
-                        <CommentsSection comments={fetchedPost.comments} />
+
+                        {/*I put here the CommentsSection with edit delete buttons*/}
+                        {/*inefficient i think*/}
+                        {fetchedPost.comments.filter(comment => !comment.isDeleted).map(async (comment) => {
+                            const user = await prisma.user.findUnique({
+                                where: {
+                                    id: comment.authorId,
+                                },
+                            });
+                            return (
+                                    <div key={comment.id}>
+                                        <div className="border-b-2 border-olive flex p-3">
+
+                                            {currentUser?.id === comment.authorId &&
+                                                <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
+                                                                   commentId={comment.id}/>}
+                                            <UserProfile
+                                                author={user?.username}
+                                                profileImageUrl={user?.profileImage}
+                                                joinDate={user?.createdAt}
+                                            />
+                                            <p>{comment.content}</p>
+                                        </div>
+                                    </div>
+                        );
+                        })}
+
+
                     </article>
                 </div>
             </div>
