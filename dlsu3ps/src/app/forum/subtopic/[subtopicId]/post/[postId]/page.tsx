@@ -58,6 +58,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                     author={fetchedPost.user?.username}
                                     profileImageUrl={profileImageUrl}
                                     joinDate={fetchedPost.user.createdAt}
+                                    userId={fetchedPost.user?.id}
                                 />
                                 <PostContent>{fetchedPost.content}</PostContent>
                             </div>
@@ -82,6 +83,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                                 author={user?.username}
                                                 profileImageUrl={user?.profileImage}
                                                 joinDate={user?.createdAt}
+                                                userId={user?.id}
                                             />
                                             <p>{comment.content}</p>
                                         </div>
