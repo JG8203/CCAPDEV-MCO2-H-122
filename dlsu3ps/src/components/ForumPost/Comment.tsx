@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Comment } from '@prisma/client'
+import { Comment as CommentType } from '@prisma/client';
 
-export default function Comment({ comment }: {comment: Comment}) {
+export default function Comment({ comment }: {comment: CommentType}) {
     if (comment.isDeleted) return null; // Optionally hide deleted comments
 
     return (

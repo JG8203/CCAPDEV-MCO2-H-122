@@ -1,4 +1,4 @@
-import { Post, Subtopic, Topic } from '../../../app/api/topics.types'
+import { Post, Subtopic, Topic } from '@/app/api/topics.types'
 
 export default function LatestPostColumn({ post }: { post: Post }) {
     return (
