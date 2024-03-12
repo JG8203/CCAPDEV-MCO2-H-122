@@ -14,7 +14,9 @@ model Comment {
   date     DateTime @db.Date
   postId   String   @db.ObjectId
   post     Post     @relation(fields: [postId], references: [id])
-  isDeleted Boolean  @default(false) @map("is_deleted")
+  isDeleted Boolean @default(false) @map("is_deleted")
+  upvotes   String[] @db.ObjectId
+  downvotes String[] @db.ObjectId
 }
 
 model Post {
