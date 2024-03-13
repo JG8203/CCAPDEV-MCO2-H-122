@@ -18,13 +18,9 @@ export default async function Page({ params }: { params: { userId: string } }) {
   return (
     <div className="bg-beige font-roboto text-base text-gray-800 align-center min-h-screen flex flex-col w-full max-h-svh">
       <div className="flex justify-center w-full p-10">
-        {userPosts.length === 0 ? (
-          <p>No posts found.</p>
-        ) : (
           <>
             <UserPostsTable posts={userPosts} />
           </>
-        )}
         {user && <UserProfileBio user={user} />}
       </div>
     </div>

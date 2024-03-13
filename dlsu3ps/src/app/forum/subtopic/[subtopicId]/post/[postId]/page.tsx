@@ -42,7 +42,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
     const profileImageUrl = fetchedPost.user?.profileImage || '';
 
     return (
-        <main className="flex flex-col justify-center items-center p-5">
+        <main className="flex flex-col justify-center items-center p-9">
             <Link href={`/forum/subtopic/${params.subtopicId}/post/${params.postId}/create`} className="mx-2 bg-burnt-sienna p-3 hover:bg-orange-800 rounded-md font-semibold text-white hover:text-slate-200 self-end">
                 Create Post
             </Link>
@@ -75,7 +75,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                             });
                             return (
                                     <div key={comment.id}>
-                                        <div className="border-b-2 border-olive flex p-3">
+                                        <div className="border-2 border-olive flex p-3">
 
                                             {currentUser?.id === comment.authorId &&
                                                 <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
@@ -86,7 +86,9 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                                 joinDate={user?.createdAt || new Date()}
                                                 userId={user?.id || ''}
                                             />
-                                            <p>{comment.content}</p>
+                                            <div class="post-content py-4 px-6 overflow-hidden flex flex-col w-full">
+                                                {comment.content}
+                                            </div>
                                         </div>
                                     </div>
                         );
