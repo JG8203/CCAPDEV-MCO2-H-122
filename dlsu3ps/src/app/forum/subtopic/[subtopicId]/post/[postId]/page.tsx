@@ -42,7 +42,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
     const profileImageUrl = fetchedPost.user?.profileImage || '';
 
     return (
-        <main className="flex flex-col justify-center items-center p-5">
+        <main className="flex flex-col justify-center items-center p-9">
             <Link href={`/forum/subtopic/${params.subtopicId}/post/${params.postId}/create`} className="mx-2 bg-burnt-sienna p-3 hover:bg-orange-800 rounded-md font-semibold text-white hover:text-slate-200 self-end">
                 Create Post
             </Link>
