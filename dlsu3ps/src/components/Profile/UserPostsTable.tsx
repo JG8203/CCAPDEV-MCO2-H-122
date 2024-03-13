@@ -8,21 +8,17 @@ export default function UserPostsTable({ posts }: { posts: Post[] }) {
             <table className="basis-4/5 text-sm text-left text-gray-500 table-fixed overflow-ellipsis border-solid border-2 border-olive mb-20">
                 <UserPostsHeader />
                 <tbody>
-                    <div className="overflow-y-scroll max-h-96">
                     {posts.length === 0 ? (
                         <tr>
-                            <td colSpan={3} className="min-w-80 min-h-32 font-medium text-gray">User has no posts</td>
+                            <td colSpan={3} className="w-96 min-h-32 p-9 font-medium text-gray text-center">User has no posts</td>
                         </tr>
                     ) : (
                         posts.map(post => (
                             <UserPostsRow post={post} key={post.id}/>
                         ))
                     )}
-                    </div>
                 </tbody>
             </table>
-
         </div>
-
     );
 }

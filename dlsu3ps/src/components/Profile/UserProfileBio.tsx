@@ -16,13 +16,13 @@ export default async function UserProfileBio({ user }: { user: User }) {
     });
     return (
         <div className="max-h-full bg-burnt-sienna rounded-lg shadow-lg p-4 flex flex-col items-center basis-1/5 ml-20">
-            <div className="bg-beige h-48 w-64 rounded-lg mb-4 relative">
+            <div className="bg-beige h-72 w-64 rounded-lg mb-4 relative">
                 <Image
                     src={user.profileImage || "https://picsum.photos/200"}
                     alt="Profile Image"
                     layout="fill"
                     objectFit="cover"
-                    className="w-34 h-34"
+                    
                 />
             </div>
 
