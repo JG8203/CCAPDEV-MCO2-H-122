@@ -1,15 +1,14 @@
 import PostHeader from '@/components/ForumPost/PostHeader';
 import UserProfile from '@/components/ForumPost/UserProfile';
 import PostContent from '@/components/ForumPost/PostContent';
-import CommentsSection from '@/components/ForumPost/CommentsSection';
 import Vote from '@/components/ForumPost/Vote';
 import prisma from '@/app/lib/prisma';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import {notFound} from 'next/navigation';
 import EditDelete from '@/components/ForumPost/EditDelete';
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
-import { Comment as CommentType } from '@prisma/client';
+import {getKindeServerSession} from '@kinde-oss/kinde-auth-nextjs/server';
 import EditDeleteComment from "@/components/ForumPost/EditDeleteComment";
+
 async function getPost(postId: string) {
     const post = await prisma.post.findUnique({
         where: { id: postId },
@@ -23,6 +22,8 @@ async function getPost(postId: string) {
     }
     return post;
 }
+
+
 
 export default async function Page({ params }: { params: { subtopicId: string, postId: string } }) {
     const { getUser } = getKindeServerSession();
@@ -47,7 +48,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
             </Link>
             <div className='rounded-md shadow'>
                 <div className='px-2 py-2 flex justify-between'>
-                    <Vote />
+                    <Vote postId={params.postId} subtopicId={params.subtopicId} />
                     <article className="overflow-x-auto flex-col w-11/12">
                         <section className="text-sm text-left text-gray-500 overflow-ellipsis border-solid border-2 border-olive">
                             <PostHeader title={fetchedPost.title} />
