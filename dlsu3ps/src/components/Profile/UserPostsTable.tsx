@@ -11,7 +11,7 @@ export default function UserPostsTable({ posts }: { posts: Post[] }) {
                     <div className="overflow-y-scroll max-h-96">
                     {posts.length === 0 ? (
                         <tr>
-                            <td colSpan={3} className="text-center">User has no posts</td>
+                            <td colSpan={3} className="min-w-80 min-h-32 font-medium text-gray">User has no posts</td>
                         </tr>
                     ) : (
                         posts.map(post => (
