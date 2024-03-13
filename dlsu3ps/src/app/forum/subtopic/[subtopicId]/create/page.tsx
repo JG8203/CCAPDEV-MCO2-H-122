@@ -7,7 +7,35 @@ export default async function CreatePost({params}: {params: {subtopicId: string}
     const userObject = await getUser();
     const kindeId = userObject?.id;
 
-    async function createPost(title: string, content: string, subtopicId: string) {
+    // async function createPost(title: string, content: string, subtopicId: string) {
+    //     try {
+    //         const user = await prisma.user.findUnique({
+    //             where: {
+    //                 kindeId: kindeId!,
+    //             },
+    //         });
+    //         const post = await prisma.post.create({
+    //             data: {
+    //                 title,
+    //                 content,
+    //                 authorId: user?.id!,
+    //                 subtopicId,
+    //             },
+    //         });
+    //     } catch (error) {
+    //         console.error('Failed to create post:', error);
+    //     } finally {
+    //         redirect(`/forum/subtopic/${subtopicId}`);
+    //     }
+    // }
+
+    async function formAction(formData: FormData) {
+        "use server";
+
+        const title = formData.get('title') as string;
+        const content = formData.get('content') as string;
+        const subtopicId = params.subtopicId;
+
         try {
             const user = await prisma.user.findUnique({
                 where: {
@@ -27,16 +55,6 @@ export default async function CreatePost({params}: {params: {subtopicId: string}
         } finally {
             redirect(`/forum/subtopic/${subtopicId}`);
         }
-    }
-
-    async function formAction(formData: FormData) {
-        "use server";
-
-        const title = formData.get('title') as string;
-        const content = formData.get('content') as string;
-        const subtopicId = params.subtopicId;
-        
-        await createPost(title, content, subtopicId);
     }
     return (
         <form action={formAction}>
