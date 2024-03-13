@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: false,
     images: {
-      domains: ['picsum.photos','en.kpop-star.net']
+      domains: ['picsum.photos','en.kpop-star.net','assets.teenvogue.com']
     }
   }
 
