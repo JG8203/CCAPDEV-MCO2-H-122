@@ -42,7 +42,7 @@ export default async function Vote({ postId, subtopicId }: { postId: string; sub
 
         try {
             const post = await prisma.post.findUnique({
-                where: { id: postId },
+                where: { id: String(postId) },
             });
 
             if (!post) {
@@ -56,7 +56,7 @@ export default async function Vote({ postId, subtopicId }: { postId: string; sub
             // Remove user's ID from the opposite vote field if present
             if (post[oppositeVoteField].includes(user.id)) {
                 await prisma.post.update({
-                    where: { id: postId },
+                    where: { id: String(postId) }, // Convert postId to string
                     data: {
                         [oppositeVoteField]: {
                             set: post[oppositeVoteField].filter((userId) => userId !== user.id),
@@ -68,7 +68,7 @@ export default async function Vote({ postId, subtopicId }: { postId: string; sub
             // Proceed to add or remove user's vote as requested
             if (post[voteField].includes(user.id)) {
                 await prisma.post.update({
-                    where: { id: postId },
+                    where: { id: String(postId) },
                     data: {
                         [voteField]: {
                             set: post[voteField].filter((userId) => userId !== user.id),
@@ -77,7 +77,7 @@ export default async function Vote({ postId, subtopicId }: { postId: string; sub
                 });
             } else {
                 await prisma.post.update({
-                    where: { id: postId },
+                    where: { id: postId.toString() },
                     data: {
                         [voteField]: {
                             push: user.id,

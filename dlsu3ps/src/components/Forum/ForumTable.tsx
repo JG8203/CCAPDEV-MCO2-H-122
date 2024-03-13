@@ -12,10 +12,17 @@ export default function ForumTable({ posts, subtopicId }: { posts: Post[]; subto
         </tr>
       </thead>
       <tbody>
-        {posts.filter(post => !post.isDeleted).map((post) => (
-          <ForumRow key={post.id} post={post} subtopicId={subtopicId} />
-        ))}
-
+        {posts.length === 0 ? (
+          <tr>
+            <td colSpan={2} className="text-center py-4">
+              No posts yet
+            </td>
+          </tr>
+        ) : (
+          posts.filter(post => !post.isDeleted).map((post) => (
+            <ForumRow key={post.id} post={post} subtopicId={subtopicId} />
+          ))
+        )}
       </tbody>
     </table>
   );

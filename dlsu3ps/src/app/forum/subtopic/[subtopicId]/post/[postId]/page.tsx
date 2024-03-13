@@ -86,7 +86,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                                 joinDate={user?.createdAt || new Date()}
                                                 userId={user?.id || ''}
                                             />
-                                            <div class="post-content py-4 px-6 overflow-hidden flex flex-col w-full">
+                                            <div className="post-content py-4 px-6 overflow-hidden flex flex-col w-full">
                                                 {comment.content}
                                             </div>
                                         </div>

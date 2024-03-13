@@ -1,8 +1,7 @@
-import { Subtopic, Topic } from '../../../app/api/topics.types'
-import LatestPostColumn from './LatestPostColumn'
-import ThreadsColumn from './ThreadsColumn'
-import VotesColumn from './VotesColumn'
-import SubtopicColumn from './SubtopicColumn'
+import { Subtopic } from '@prisma/client';
+import ThreadsColumn from '@/components/Topics/TopicsTableComponents/ThreadsColumn'
+import VotesColumn from '@/components/Topics/TopicsTableComponents/VotesColumn'
+import SubtopicColumn from '@/components/Topics/TopicsTableComponents/SubtopicColumn';
 import {posts} from '@/app/api/data';
 
 export default function SubtopicRow({subtopic}: {subtopic: Subtopic}) {
