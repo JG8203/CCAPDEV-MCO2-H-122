@@ -8,7 +8,6 @@ export default function ForumTable({ posts, subtopicId }: { posts: Post[]; subto
       <thead className="text-xs uppercase bg-olive text-beige">
         <tr>
           <th scope="col" className="pt-5 pb-4 px-6">Forum</th>
-          <th scope="col" className="pt-5 pb-4 px-4">Latest Post</th>
           <th scope="col" className="pt-5 pb-4 px-4">Posts</th>
         </tr>
       </thead>

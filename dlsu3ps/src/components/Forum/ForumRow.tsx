@@ -36,9 +36,7 @@ export default function ForumRow({ post, subtopicId }: { post: Post; subtopicId:
                         </div>
                     </div>
                 </td>
-                <td className="py-4 px-6">
-                    {new Date(post.date).toLocaleDateString()}
-                </td>
+
                 <td className="py-4 px-6">
                     {commentsCount}
                 </td>
