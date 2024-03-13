@@ -8,7 +8,7 @@ export default function LandingPage() {
           <p className="text-olive text-center text-6xl font-black">DLSU PUSA FORUMS</p>
         </div>
         <div className="flex justify-center items-center mt-5 gap-4">
-          {['mimiw1.jpg', 'mimiw2.png', 'mimiw3.png', 'mimiw4.png'].map((image, index) => (
+          {['mimiw1.png', 'mimiw2.png', 'mimiw3.png', 'mimiw4.png'].map((image, index) => (
             <div key={index} className="w-52 h-80 rounded-lg border border-black overflow-hidden relative">
               <Image
                 src={`/images/carousel/${image}`}
