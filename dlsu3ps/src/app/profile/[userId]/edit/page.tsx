@@ -9,14 +9,15 @@ export default async function page({params}: {params: {userId: string}}) {
             id: params.userId,
         },
     });
-    console.log(currentUser)
     async function formAction(formData: FormData) {
         "use server"
+        console.log(formData);
         const username = formData.get('username');
         const email = formData.get('email');
         const bio = formData.get('bio');
         const favoriteCat = formData.get('favoriteCatto');
-
+        const profileImageUrl = formData.get('profileImage');
+        
         try {
             const user = await prisma.user.findUnique({
                 where: {
@@ -32,6 +33,7 @@ export default async function page({params}: {params: {userId: string}}) {
                     email: email as string,
                     bio: bio as string,
                     favoriteCat: favoriteCat as string,
+                    profileImage: profileImageUrl as string,
                 },
             });
         } catch (error) {
@@ -45,7 +47,7 @@ export default async function page({params}: {params: {userId: string}}) {
           <form className="max-w-4xl mx-auto p-5" action={formAction}>
             <h1 className="text-2xl font-bold text-dim-gray mb-6">Edit Profile</h1>
             <ProfileUsername username={currentUser?.username || ""} bio={currentUser?.bio || ""} profileLink={currentUser?.profileImage || ""}/>
-            <Fields username={currentUser?.username || ""} email={currentUser?.email || ""} favoriteCatto={currentUser?.favoriteCat || ""} bio={currentUser?.bio || ""} />
+            <Fields username={currentUser?.username || ""} email={currentUser?.email || ""} favoriteCatto={currentUser?.favoriteCat || ""} bio={currentUser?.bio || ""} profileImageUrl={currentUser?.profileImage || ""}/>
             <div className="flex items-center justify-between mt-8">
               <button type="submit" className="bg-burnt-sienna hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Save Changes

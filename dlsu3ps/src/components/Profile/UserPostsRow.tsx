@@ -2,7 +2,6 @@ import type { Post } from '@prisma/client'
 import Link from 'next/link';
 
 export default function UserPostsRow({ post }: { post: Post }) {
-    console.log(post);
     return (
         <tr className="border-b-2 border-olive">
             <td scope="row" className="p-2 font-medium text-gray-900 flex">

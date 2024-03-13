@@ -81,10 +81,10 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                                 <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
                                                                    commentId={comment.id}/>}
                                             <UserProfile
-                                                author={user?.username}
-                                                profileImageUrl={user?.profileImage}
-                                                joinDate={user?.createdAt}
-                                                userId={user?.id}
+                                                author={user?.username || ''}
+                                                profileImageUrl={user?.profileImage || ''}
+                                                joinDate={user?.createdAt || new Date()}
+                                                userId={user?.id || ''}
                                             />
                                             <p>{comment.content}</p>
                                         </div>

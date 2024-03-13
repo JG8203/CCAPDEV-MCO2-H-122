@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function DeleteComment({ params }: { params: { commentId: string } }) {
-    console.log(params);
     const { getUser } = getKindeServerSession();
     const userObject = await getUser();
     const kindeId = userObject?.id;
@@ -12,11 +11,9 @@ export default async function DeleteComment({ params }: { params: { commentId: s
             id: params.commentId,
         },
         include: {
-            post: true, // Include the post relation
+            post: true, 
         },
     });
-
-    // Fetch the user separately using the authorId from the comment
     const user = comment && await prisma.user.findUnique({
         where: {
             id: comment.authorId,
@@ -24,7 +21,7 @@ export default async function DeleteComment({ params }: { params: { commentId: s
     });
 
     if (!comment || !user || user.kindeId !== kindeId) {
-        return { notFound: true }; // Simplified, adjust based on your error handling
+        return { notFound: true };
     }
 
     async function formAction() {

@@ -3,7 +3,6 @@ import UserProfileBio from "@/components/Profile/UserProfileBio";
 import prisma from "@/app/lib/prisma";
 
 export default async function Page({ params }: { params: { userId: string } }) {
-  console.log(params.userId);
   const user = await prisma.user.findUnique({
     where: {
       id: params.userId

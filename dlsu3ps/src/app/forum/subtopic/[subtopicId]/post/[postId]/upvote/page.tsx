@@ -15,10 +15,6 @@ export default async function upvotePost({ params }: { params: { postId: string,
         },
     });
 
-    const vote = await prisma.vote.create({
-
-    })
-
     async function formAction() {
         "use server";
         const postId = params.postId;

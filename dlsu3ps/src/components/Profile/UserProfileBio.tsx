@@ -8,7 +8,6 @@ export default async function UserProfileBio({ user }: { user: User }) {
     const { getUser } = getKindeServerSession();
     const userObject = await getUser();
     const kindeId = userObject?.id;
-    console.log(kindeId);
     const currentUser = await prisma.user.findUnique({
         where: {
             kindeId: kindeId!,

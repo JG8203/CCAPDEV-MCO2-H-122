@@ -1,6 +1,4 @@
-import prisma from "@/app/lib/prisma"
-
-export default function Fields({username, email, bio, favoriteCatto} : {username: string, email: string, bio: string, favoriteCatto: string}) {
+export default function Fields({username, email, bio, favoriteCatto, profileImageUrl} : {username: string, email: string, bio: string, favoriteCatto: string, profileImageUrl: string}) {
 
     return (
         <>
@@ -49,6 +47,18 @@ export default function Fields({username, email, bio, favoriteCatto} : {username
                     placeholder="Your favorite catto"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     defaultValue={favoriteCatto}
+                />
+            </div>
+
+            <div className="mt-4 mb-8">
+                <label htmlFor="catto" className="block text-gray-700 text-sm font-bold mb-2">Profile Url (CERTAIN URLs ONLY)</label>
+                <input
+                    type="text"
+                    id="profileImage"
+                    name="profileImage"
+                    placeholder="Your profile URL"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    defaultValue={profileImageUrl}
                 />
             </div>
         </>

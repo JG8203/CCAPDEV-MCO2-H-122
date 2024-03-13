@@ -6,7 +6,6 @@ import prisma from "@/app/lib/prisma";
 export default async function NavBar() {
     const { isAuthenticated, getUser } = getKindeServerSession();
     const currentUser = await getUser();
-    console.log(currentUser);
 
     let userObject = null;
     if (await isAuthenticated()) {

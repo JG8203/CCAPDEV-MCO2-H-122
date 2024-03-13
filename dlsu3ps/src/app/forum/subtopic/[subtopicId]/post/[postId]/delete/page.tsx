@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function DeletePost({ params }: { params: { postId: string, subtopicId: string } }) {
-    console.log(params);
     const { getUser } = getKindeServerSession();
     const userObject = await getUser();
     const kindeId = userObject?.id;
@@ -17,7 +16,7 @@ export default async function DeletePost({ params }: { params: { postId: string,
     });
 
     if (!post || post.user.kindeId !== kindeId) {
-        return { notFound: true }; // Simplified, adjust based on your error handling
+        return { notFound: true }; 
     }
 
     async function formAction(formData: FormData) {

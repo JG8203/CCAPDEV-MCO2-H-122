@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function EditPost({ params }: { params: { postId: string, subtopicId: string } }) {
-    console.log(params);
     const { getUser } = getKindeServerSession();
     const userObject = await getUser();
     const kindeId = userObject?.id;
