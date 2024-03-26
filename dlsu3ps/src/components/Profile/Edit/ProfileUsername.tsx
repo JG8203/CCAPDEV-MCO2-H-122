@@ -1,6 +1,6 @@
-import Image from "next/image"
+import Image from "next/image";
 
-export default function ProfileUsername({username, profileLink, bio} : {username: string, profileLink: string, bio: string}) {
+export default function ProfileUsername({ username, profileLink, bio }: { username: string; profileLink: string; bio: string }) {
     return (
         <>
             <div className="flex flex-col md:flex-row md:items-center rounded-lg overflow-hidden mb-6">
@@ -12,8 +12,15 @@ export default function ProfileUsername({username, profileLink, bio} : {username
                 <div className="p-8">
                     <div className="uppercase tracking-wide text-sm text-olive font-semibold">{username}</div>
                     <p className="mt-2 text-gray-500">{bio}</p>
+                    <input
+                        id="profileImage"
+                        name="profileImage"
+                        className="mt-2 p-1 rounded-md font-semibold text-black" 
+                        type="file"
+                        accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+                    />
                 </div>
             </div>
         </>
-    )
+    );
 }
