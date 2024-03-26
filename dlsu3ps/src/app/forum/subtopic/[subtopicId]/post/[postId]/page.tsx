@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                 <div className='px-2 py-2 flex justify-between'>
                     <Vote postId={params.postId} subtopicId={params.subtopicId} />
                     <article className="overflow-x-auto flex-col w-11/12">
-                        <section className="text-sm text-left text-gray-500 overflow-ellipsis border-solid border-2 border-olive">
+                        <section className="text-sm text-left text-gray-500 overflow-ellipsis border-x-2 border-olive">
                             <PostHeader title={fetchedPost.title} />
                             {currentUser?.id === fetchedPost.user.id && <EditDelete postId={params.postId} subtopicId={params.subtopicId}/>}
                             <div className="border-b-2 border-olive flex p-3">
@@ -75,7 +75,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                             });
                             return (
                                     <div key={comment.id}>
-                                        <div className="border-2 border-olive flex p-3">
+                                        <div className="border border-x-2 border-b-2 border-olive flex p-4">
 
                                             {currentUser?.id === comment.authorId &&
                                                 <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
@@ -86,18 +86,38 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                                 joinDate={user?.createdAt || new Date()}
                                                 userId={user?.id || ''}
                                             />
-                                            <div className="post-content py-4 px-6 overflow-hidden flex flex-col w-full">
+                                            <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
                                                 {comment.content}
                                             </div>
                                         </div>
                                     </div>
                         );
                         })}
-
-
                     </article>
                 </div>
             </div>
+            
+            {/*Comment Section*/}
+            <main className=''>
+                <div className="flex flex-col p-5">
+                    <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
+                    <textarea
+                        className="bg-white appearance-none border-2 border-dim-gray rounded w-full px-96 h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna"
+                        name="content"
+                        rows={20}
+                        required
+                        minLength={20}
+                    ></textarea>
+                </div>
+                <div className="w-full flex justify-end">
+                    <button
+                        className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline m-5"
+                        type="submit"
+                    >
+                        Create Comment
+                    </button>
+                </div>
+            </main>
         </main>
     );
 }

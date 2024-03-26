@@ -11,7 +11,7 @@ export default function SubtopicTable({ subtopics }: { subtopics: Subtopic[] }) 
             Forum
           </th>
           
-          <th scope="col" className="pt-5 pb-4 px-0">
+          <th scope="col" className="pt-5 pb-4 px-6">
             Threads
           </th>
           <th scope="col" className="pt-5 pb-4 px-6">
