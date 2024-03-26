@@ -4,7 +4,7 @@ import PostContent from '@/components/ForumPost/PostContent';
 import Vote from '@/components/ForumPost/Vote';
 import prisma from '@/app/lib/prisma';
 import Link from 'next/link';
-import {notFound} from 'next/navigation';
+import {notFound, redirect} from 'next/navigation';
 import EditDelete from '@/components/ForumPost/EditDelete';
 import {getKindeServerSession} from '@kinde-oss/kinde-auth-nextjs/server';
 import EditDeleteComment from "@/components/ForumPost/EditDeleteComment";
@@ -34,9 +34,37 @@ export default async function Page({ params }: { params: { subtopicId: string, p
             kindeId: userObject?.id,
         },
     });
+    const kindeId = userObject?.id;
 
     if (!fetchedPost || fetchedPost.isDeleted) {
         return notFound();
+    }
+    async function formAction(formData: FormData) {
+        "use server";
+
+        const content = formData.get('content');
+        const postId = params.postId;
+
+        try {
+            const user = await prisma.user.findUnique({
+                where: {
+                    kindeId: kindeId!,
+                },
+            });
+            const comment = await prisma.comment.create({
+                data: {
+                    content: content as string,
+                    authorId: user?.id!,
+                    postId: postId,
+                    date: new Date()
+                },
+            });
+        } catch (error) {
+            console.error('Failed to create post:', error);
+        } finally {
+            const { subtopicId, postId } = params;
+            redirect(`/forum/subtopic/${subtopicId}/post/${postId}`);
+        }
     }
 
     const profileImageUrl = fetchedPost.user?.profileImage || '';
@@ -97,8 +125,8 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                 </div>
             </div>
             
-            {/*Comment Section*/}
             <main className=''>
+              <form action={formAction} method="POST">
                 <div className="flex flex-col p-5">
                 <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
                     <div className="flex items-center"> 
@@ -132,13 +160,8 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                         </button>
                     </div>
                 </div>
+              </form>
             </main>
         </main>
     );
-}
-
-function wait(duration: number) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, duration);
-    });
 }
