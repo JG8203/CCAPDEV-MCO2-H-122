@@ -76,19 +76,24 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                             return (
                                     <div key={comment.id}>
                                         <div className="border border-x-2 border-b-2 border-olive flex p-4">
+                                        <div className="flex-row">
+                                                <UserProfile
+                                                    author={user?.username || ''}
+                                                    profileImageUrl={user?.profileImage || ''}
+                                                    joinDate={user?.createdAt || new Date()}
+                                                    userId={user?.id || ''}
+                                                />
+                                                <div className="font-light italic mt-3">Wed Mar 13 2024 20:31:21 GMT+0800 (Philippine Standard Time)</div>
+                                            </div>
+
+
+                                            <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
+                                                {comment.content}
+                                            </div>
 
                                             {currentUser?.id === comment.authorId &&
                                                 <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
                                                                    commentId={comment.id}/>}
-                                            <UserProfile
-                                                author={user?.username || ''}
-                                                profileImageUrl={user?.profileImage || ''}
-                                                joinDate={user?.createdAt || new Date()}
-                                                userId={user?.id || ''}
-                                            />
-                                            <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
-                                                {comment.content}
-                                            </div>
                                         </div>
                                     </div>
                         );
@@ -100,7 +105,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
             {/*Comment Section*/}
             <main className=''>
                 <div className="flex flex-col p-5">
-                <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
+                    <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
                     <div className="flex items-center"> 
 
                         <div className="flex-shrink-0 p-3">
