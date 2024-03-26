@@ -100,22 +100,37 @@ export default async function Page({ params }: { params: { subtopicId: string, p
             {/*Comment Section*/}
             <main className=''>
                 <div className="flex flex-col p-5">
-                    <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
-                    <textarea
-                        className="bg-white appearance-none border-2 border-dim-gray rounded w-full px-96 h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna"
-                        name="content"
-                        rows={20}
-                        required
-                        minLength={20}
-                    ></textarea>
-                </div>
-                <div className="w-full flex justify-end">
-                    <button
-                        className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline m-5"
-                        type="submit"
-                    >
-                        Create Comment
-                    </button>
+                <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
+                    <div className="flex items-center"> 
+
+                        <div className="flex-shrink-0 p-3">
+                            <UserProfile
+                                author={fetchedPost.user?.username}
+                                profileImageUrl={profileImageUrl}
+                                joinDate={fetchedPost.user.createdAt}
+                                userId={fetchedPost.user?.id}
+                            />
+                        </div>
+
+                        <div className="flex flex-col flex-grow ml-4"> 
+                            <textarea
+                                className="bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna"
+                                name="content"
+                                rows="10"
+                                required
+                                minLength="20"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div className="w-full flex justify-end mt-4">
+                        <button
+                            className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit"
+                        >
+                            Create Comment
+                        </button>
+                    </div>
                 </div>
             </main>
         </main>
