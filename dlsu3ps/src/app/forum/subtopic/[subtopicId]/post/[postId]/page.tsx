@@ -23,8 +23,6 @@ async function getPost(postId: string) {
   return post;
 }
 
-
-
 export default async function Page({ params }: { params: { subtopicId: string, postId: string } }) {
   const { getUser } = getKindeServerSession();
   const userObject = await getUser();
@@ -39,6 +37,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
   if (!fetchedPost || fetchedPost.isDeleted) {
     return notFound();
   }
+
   async function formAction(formData: FormData) {
     "use server";
 
@@ -74,6 +73,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
       <Link href={`/forum/subtopic/${params.subtopicId}/post/${params.postId}/create`} className="mx-2 bg-burnt-sienna p-3 hover:bg-orange-800 rounded-md font-semibold text-white hover:text-slate-200 self-end">
         Create Post
       </Link>
+
       <div className='rounded-md shadow'>
         <div className='px-2 py-2 flex justify-between'>
           <Vote postId={params.postId} subtopicId={params.subtopicId} />
@@ -82,7 +82,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               <PostHeader title={fetchedPost.title} />
               {currentUser?.id === fetchedPost.user.id && <EditDelete postId={params.postId} subtopicId={params.subtopicId} />}
               <div className="border-b-2 border-olive flex p-3">
-                {/*Make it so that this only accepts the user object instead of the user id*/}
+                {/* Make it so that this only accepts the user object instead of the user id */}
                 <UserProfile
                   author={fetchedPost.user?.username}
                   profileImageUrl={profileImageUrl}
@@ -93,44 +93,8 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               </div>
             </section>
 
-<<<<<<< HEAD
-                        {/*I put here the CommentsSection with edit delete buttons*/}
-                        {/*inefficient i think*/}
-                        {fetchedPost.comments.filter(comment => !comment.isDeleted).map(async (comment) => {
-                            const user = await prisma.user.findUnique({
-                                where: {
-                                    id: comment.authorId,
-                                },
-                            });
-                            return (
-                                    <div key={comment.id}>
-                                        <div className="border border-x-2 border-b-2 border-olive flex p-4">
-                                        <div className="flex-row">
-                                                <UserProfile
-                                                    author={user?.username || ''}
-                                                    profileImageUrl={user?.profileImage || ''}
-                                                    joinDate={user?.createdAt || new Date()}
-                                                    userId={user?.id || ''}
-                                                />
-                                                <div className="font-light italic mt-3">Wed Mar 13 2024 20:31:21 GMT+0800 (Philippine Standard Time)</div>
-                                            </div>
-
-
-                                            <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
-                                                {comment.content}
-                                            </div>
-
-                                            {currentUser?.id === comment.authorId &&
-                                                <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
-                                                                   commentId={comment.id}/>}
-                                        </div>
-                                    </div>
-                        );
-                        })}
-                    </article>
-=======
-            {/*I put here the CommentsSection with edit delete buttons*/}
-            {/*inefficient i think*/}
+            {/* I put here the CommentsSection with edit delete buttons */}
+            {/* inefficient i think */}
             {fetchedPost.comments.filter(comment => !comment.isDeleted).map(async (comment) => {
               const user = await prisma.user.findUnique({
                 where: {
@@ -154,13 +118,13 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                       {comment.content}
                     </div>
                   </div>
->>>>>>> 92df9524deda0b2efd053f92b201be5fbfc04023
                 </div>
               );
             })}
           </article>
-          
+          </div>
         </div>
+
         <form action={formAction} method="POST">
           <div className="w-full flex flex-col p-5">
             <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
@@ -185,27 +149,25 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                 ></textarea>
               </div>
             </div>
-<<<<<<< HEAD
             
-            {/*Comment Section*/}
+            {/* Comment Section */}
             <main className=''>
                 <div className="flex flex-col p-5">
                     <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
                     <div className="flex items-center"> 
-=======
->>>>>>> 92df9524deda0b2efd053f92b201be5fbfc04023
 
-            <div className="w-full flex justify-end mt-4">
-              <button
-                className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Create Comment
-              </button>
-            </div>
-          </div>
+                        <div className="w-full flex justify-end mt-4">
+                            <button
+                                className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                                type="submit">
+                                Create Comment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
         </form>
-      </div>
     </main>
   );
 }
