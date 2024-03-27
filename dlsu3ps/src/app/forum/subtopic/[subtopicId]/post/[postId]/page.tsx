@@ -84,12 +84,14 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               <div className="border-b-2 border-olive flex p-3">
                 {/* Make it so that this only accepts the user object instead of the user id */}
                 <UserProfile
-                  author={fetchedPost.user?.username}
-                  profileImageUrl={profileImageUrl}
-                  joinDate={fetchedPost.user.createdAt}
-                  userId={fetchedPost.user?.id}
+                    author={fetchedPost.user?.username}
+                    profileImageUrl={profileImageUrl}
+                    joinDate={fetchedPost.user.createdAt}
+                    userId={fetchedPost.user?.id}
                 />
-                <PostContent>{fetchedPost.content}</PostContent>
+
+                <PostContent date={fetchedPost.date}>{fetchedPost.content}</PostContent>
+
               </div>
             </section>
 
