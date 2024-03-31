@@ -18,8 +18,35 @@ async function getPostCommentsCount(postId: string) {
     return postWithCommentsCount?._count.comments;
   }
 
-export default function ForumRow({ post, subtopicId }: { post: Post; subtopicId: string }) {
+async function deletePost(postId: string) {
+    await prisma.post.update({
+        where: {
+            id: postId,
+        },
+        data: {
+            isDeleted: true,
+        },
+    });
+}
+
+
+export default async function ForumRow({ post, subtopicId }: { post: Post; subtopicId: string }) {
     const commentsCount = getPostCommentsCount(post.id);
+    const {
+        getAccessToken,
+        getBooleanFlag,
+        getFlag,
+        getIdToken,
+        getIntegerFlag,
+        getOrganization,
+        getPermission,
+        getPermissions,
+        getStringFlag,
+        getUser,
+        getUserOrganizations,
+        isAuthenticated
+    } = getKindeServerSession();
+    console.log(await getPermissions());
     return (
         <>
             <tr className="border-b-2 border-olive">
@@ -40,6 +67,7 @@ export default function ForumRow({ post, subtopicId }: { post: Post; subtopicId:
                 <td className="py-4 px-6">
                     {commentsCount}
                 </td>
+                {isAuthenticated && (await getPermissions())?.permissions.includes('delete-perm') && <div> <button>Delete</button> </div>}
             </tr>
         </>
     );
