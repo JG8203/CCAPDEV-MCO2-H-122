@@ -9,6 +9,7 @@ import EditDelete from '@/components/ForumPost/EditDelete';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import EditDeleteComment from "@/components/ForumPost/EditDeleteComment";
 import {TimeAgo} from "@/components/ForumPost/TimeAgo";
+import VoteComment from "@/components/ForumPost/VoteComment";
 async function getPost(postId: string) {
   const post = await prisma.post.findUnique({
     where: { id: postId },
@@ -70,18 +71,15 @@ export default async function Page({ params }: { params: { subtopicId: string, p
 
   return (
     <main className="flex flex-col justify-center items-center p-9">
-      <Link href={`/forum/subtopic/${params.subtopicId}/post/${params.postId}/create`} className="mx-2 bg-burnt-sienna p-3 hover:bg-orange-800 rounded-md font-semibold text-white hover:text-slate-200 self-end">
-        Create Post
-      </Link>
 
-      <div className='rounded-md shadow'>
+      <div className='rounded-md shadow w-6/12'>{/*change width to resize*/}
         <div className='px-2 py-2 flex justify-between'>
           <Vote postId={params.postId} subtopicId={params.subtopicId} />
           <article className="overflow-x-auto flex-col w-11/12">
             <section className="text-sm text-left text-gray-500 overflow-ellipsis border-x-2 border-olive">
               <PostHeader title={fetchedPost.title} />
               {currentUser?.id === fetchedPost.user.id && <EditDelete postId={params.postId} subtopicId={params.subtopicId} />}
-              <div className="border-b-2 border-olive flex p-3">
+              <div className="border-b-2 border-olive flex p-3" >
                 {/* Make it so that this only accepts the user object instead of the user id */}
                 <UserProfile
                     author={fetchedPost.user?.username}
@@ -106,6 +104,8 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               return (
                   <div key={comment.id}>
                     <div className="border border-x-2 border-b-2 border-olive flex p-4">
+                      {/*<VoteComment postId={params.postId} subtopicId={params.subtopicId} commentId={comment.id}/>*/}
+                      {/*Vote comment dito not working pa*/}
                       <div className="flex-row">
                         <UserProfile
                             author={user?.username || ''}
@@ -135,11 +135,10 @@ export default async function Page({ params }: { params: { subtopicId: string, p
         </div>
       </div>
 
-      <form action={formAction} method="POST">
+      <form action={formAction} method="POST" className="w-6/12">
         <div className="w-full flex flex-col p-5">
           <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
           <div className="flex items-center w-full"> {/* Added w-full here */}
-
             <div className="flex-shrink-0 p-3">
               <UserProfile
                   author={currentUser?.username || ''}
@@ -148,10 +147,9 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                   userId={currentUser?.id || ''}
               />
             </div>
-
             <div className="flex flex-col flex-grow ml-4">
                 <textarea
-                    className="bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna p-5"
+                    className="resize-none bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna p-5"
                     name="content"
                     rows={10}
                     required
@@ -159,11 +157,10 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                 ></textarea>
             </div>
           </div>
-
           {/* Comment Section */}
           <main className=''>
             <div className="flex flex-col p-5">
-              <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
+              <label htmlFor="post-content" className="text-2xl py-2 font-semibold"></label>
               <div className="flex items-center">
 
                 <div className="w-full flex justify-end mt-4">
