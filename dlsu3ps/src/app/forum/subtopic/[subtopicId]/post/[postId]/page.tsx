@@ -72,7 +72,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
   return (
     <main className="flex flex-col justify-center items-center p-9">
 
-      <div className='rounded-md shadow w-6/12'>{/*change width to resize*/}
+      <div className='rounded-md shadow w-8/12'>{/*change width to resize*/}
         <div className='px-2 py-2 flex justify-between'>
           <Vote postId={params.postId} subtopicId={params.subtopicId} />
           <article className="overflow-x-auto flex-col w-11/12">
@@ -163,9 +163,9 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               <label htmlFor="post-content" className="text-2xl py-2 font-semibold"></label>
               <div className="flex items-center">
 
-                <div className="w-full flex justify-end mt-4">
+                <div className="w-full flex justify-end mt-4 ">
                             <button
-                                className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+                                className="bg-olive border-4 rounded-lg hover:border-double  border-beige text-white font-bold py-3 px-4 focus:outline-none focus:shadow-outline"
                                 type="submit">
                                 Create Comment
                             </button>

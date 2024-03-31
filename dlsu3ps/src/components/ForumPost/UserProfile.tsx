@@ -17,14 +17,14 @@ export default function UserProfile({ author, profileImageUrl, joinDate, userId}
 
         <div className="font-medium text-olive">{author}</div>
         </Link>
-      <div className="bg-dim-gray rounded-lg border-2 w-36 h-36 relative">
+      <div className=" w-36 h-36 relative">
           <Link href={`/profile/${userId}`}>
           <Image
             src={profileImageUrl}
             alt=""
             layout="fill"
             objectFit="cover"
-            className="w-34 h-34"
+            className="w-34 h-34 bg-dim-white rounded-2xl border-4 border-olive hover:border-double"
           />
           </Link>
       </div>
