@@ -3,6 +3,7 @@ import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/app/lib/prisma";
 import SearchBar from "@/components/SearchBar";
+import Image from "next/image";
 
 export default async function NavBar() {
     const { isAuthenticated, getUser } = getKindeServerSession();
@@ -23,11 +24,17 @@ export default async function NavBar() {
 
     return (
         <header className="flex h-20 justify-between items-center bg-wow-yellow p-0 px-10 sticky top-0 z-50">
-            <div className="logo">
-                <Link href="/" className="text-beige no-underline">
+                <Link href="/" className="text-beige no-underline flex items-center">
+                    <Image
+                        src={"/images/logo/dlsu3pslogo.svg"}
+                        alt="logo"
+                        width={65} // Adjust width
+                        height={65} // Adjust height
+
+                    />
                     <h1 className="m-0 text-3xl font-bold">DLSU3PS</h1>
                 </Link>
-            </div>
+
            <SearchBar/>
 
             <nav className="flex">
