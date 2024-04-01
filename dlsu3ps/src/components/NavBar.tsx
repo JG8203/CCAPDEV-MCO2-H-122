@@ -28,11 +28,11 @@ export default async function NavBar() {
                     <Image
                         src={"/images/logo/dlsu3pslogo.svg"}
                         alt="logo"
-                        width={65} // Adjust width
-                        height={65} // Adjust height
+                        width={36} 
+                        height={36} 
 
                     />
-                    <h1 className="m-0 text-3xl font-bold">DLSU3PS</h1>
+                    <h1 className="m-0 pl-2 text-3xl font-bold">DLSU3PS</h1>
                 </Link>
 
            <SearchBar/>
