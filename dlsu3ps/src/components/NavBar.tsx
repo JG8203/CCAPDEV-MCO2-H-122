@@ -4,7 +4,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/app/lib/prisma";
 import SearchBar from "@/components/SearchBar";
 import Image from "next/image";
-
+import React from "react";
+import SearchList from "@/components/Forum/SearchList";
 export default async function NavBar() {
     const { isAuthenticated, getUser } = getKindeServerSession();
     const currentUser = await getUser();
@@ -22,6 +23,7 @@ export default async function NavBar() {
         }
     }
 
+    // @ts-ignore
     return (
         <header className="flex h-20 justify-between items-center bg-wow-yellow p-0 px-10 sticky top-0 z-50">
                 <Link href="/" className="text-beige no-underline flex items-center">
@@ -34,7 +36,7 @@ export default async function NavBar() {
                     />
                     <h1 className="m-0 pl-2 text-3xl font-bold">DLSU3PS</h1>
                 </Link>
-                <SearchBar/>
+                <SearchBar></SearchBar>
 
             <nav className="flex">
                 <Link href="/about" className="text-beige no-underline mx-5 hover:text-gray-800">About</Link>

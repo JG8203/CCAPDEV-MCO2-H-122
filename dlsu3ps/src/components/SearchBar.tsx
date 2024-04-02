@@ -1,9 +1,27 @@
+"use client";
 import prisma from "@/app/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Post } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-export default async function SearchBar(className: string | undefined){
+
+import {useSearchParams, usePathname, useRouter} from "next/navigation";
+
+export default function SearchBar(className: string | undefined){
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const {replace} = useRouter();
+    const handleSearch = (searchTerm : string) => {
+        const params = new URLSearchParams(searchParams);
+        if (searchTerm) {
+            params.set("query", searchTerm);
+        } else {
+            params.delete("query");
+        }
+        replace(`${pathname}?${params.toString()}`);
+
+    };
     return (
+        <>
             <form className="w-4/12 ml-5">
                 <div className="flex">
                     <label htmlFor="search-dropdown"
@@ -44,7 +62,11 @@ export default async function SearchBar(className: string | undefined){
                     <div className="relative w-full">
                         <input type="search" id="search-dropdown"
                             className="block p-2.5 w-full z-20 text-sm text-olive-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-white focus:ring-olive focus:border-olive dark:bg-white dark:placeholder-olive-400 dark:text-olive dark:focus:border-olive"
-                            placeholder="Search cattos around the campus..." required/>
+                            placeholder="Search cattos around the campus..."
+                            onChange={(e) => {
+                                handleSearch(e.target.value);
+                        }}
+                            required/>
                         <button type="submit" 
                                 className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-beige bg-olive rounded-e-lg border border-olive hover:bg-beige hover:text-olive focus:ring-1 focus:outline-none focus:ring-olive dark:bg-olive dark:hover:bg-olive dark:focus:ring-olive">
                             <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -57,5 +79,7 @@ export default async function SearchBar(className: string | undefined){
                     </div>
                 </div>
             </form>
+
+        </>
     );
 }
