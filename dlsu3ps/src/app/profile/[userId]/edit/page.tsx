@@ -53,26 +53,28 @@ export default async function page({ params }: { params: { userId: string } }) {
 
   async function formAction(formData: FormData) {
     "use server";
-    console.log(formData);
+    const user = await prisma.user.findUnique({
+      where: {
+        id: params.userId,
+      },
+    });
     const username = formData.get('username');
     const email = formData.get('email');
     const bio = formData.get('bio');
     const favoriteCat = formData.get('favoriteCatto');
-    const profileImageData = formData.get('profileImage');
+    const profileImageData = formData.get('profileImage') as File | undefined;
 
     let profileImageUrl = "";
-    if (profileImageData instanceof File) {
-      const response = await uploadFiles(profileImageData);
-      profileImageUrl = response.secure_url || ""; //this be dangerous fr pero we cramming
+
+    if (profileImageData?.name == "undefined") {
+      profileImageUrl = user?.profileImage || "";
+    } else {
+      const response = await uploadFiles(profileImageData as File);
+      profileImageUrl = response.secure_url;
     }
 
     try {
-      const user = await prisma.user.findUnique({
-        where: {
-          id: params.userId,
-        },
-      });
-      const updatedUser = await prisma.user.update({
+      await prisma.user.update({
         where: {
           id: user?.id!,
         },
@@ -94,7 +96,7 @@ export default async function page({ params }: { params: { userId: string } }) {
     <>
       <form className="max-w-4xl mx-auto p-5" action={formAction}>
         <h1 className="text-2xl font-bold text-dim-gray mb-6">Edit Profile</h1>
-        <ProfileUsername username={currentUser?.username || ""} bio={currentUser?.bio || ""} profileLink={currentUser?.profileImage || ""} />
+        <ProfileUsername username={currentUser?.username || ""} bio={currentUser?.bio || ""} profileLink={currentUser?.profileImage || ""}/>
         <Fields username={currentUser?.username || ""} email={currentUser?.email || ""} favoriteCatto={currentUser?.favoriteCat || ""} bio={currentUser?.bio || ""} profileImageUrl={currentUser?.profileImage || ""} />
         <div className="flex items-center justify-between mt-8">
           <button type="submit" className="bg-burnt-sienna hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
