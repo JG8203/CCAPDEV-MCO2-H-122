@@ -12,6 +12,7 @@ export default function Fields({username, email, bio, favoriteCatto, profileImag
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     required
                     defaultValue={username}
+                    disabled
                 />
             </div>
             <div className="mt-8">

@@ -1,7 +1,12 @@
 import Image from 'next/image';
+import SearchList from "@/components/Forum/SearchList";
+import {useSearchParams, usePathname, useRouter} from "next/navigation";
 
-export default function LandingPage() {
-  return (
+export default function LandingPage({searchParams} : {searchParams?: { query? : string};
+}) {
+    const query = searchParams?.query || "";
+
+    return (
     <div className="bg-beige font-roboto m-0 p-0 h-screen flex flex-col">
       <div className="flex justify-center items-center h-screen flex-col">
         <div className="flex w-full max-w-md flex-col justify-center items-center">
@@ -20,7 +25,10 @@ export default function LandingPage() {
             </div>
           ))}
         </div>
+          <SearchList query = {query}/>
+
       </div>
+
     </div>
   );
 }
