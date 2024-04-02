@@ -20,9 +20,10 @@ export default async function SearchList({query}: {query: string}) {
 
             <div className="bg-beige font-roboto text-base text-gray-800 align-center min-h-screen flex flex-col w-full max-h-svh">
                 {Array.isArray(posts) && filteredPosts.length === 0 ? (
-                        <div>No match found</div>
-                    ) : (
-                        filteredPosts.map((post) => (
+                    <td colSpan={2} className="text-center py-4 font-bold">
+                        No match found</td>
+                ) : (
+                    filteredPosts.map((post) => (
                             <div key={post.id} className="flex flex-col">
                                 <div className="flex space-x-6 items-center">
                                     <UserPostsRow post={post} />
