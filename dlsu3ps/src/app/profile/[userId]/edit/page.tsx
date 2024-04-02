@@ -3,12 +3,45 @@ import Fields from "@/components/Profile/Edit/Fields";
 import prisma from "@/app/lib/prisma";
 import { redirect } from "next/navigation";
 import { UTApi } from "uploadthing/server";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+
+interface CloudinaryResource {
+  context?: {
+    alt?: string;
+    caption?: string;
+  };
+  public_id: string;
+  secure_url: string;
+}
 
 async function uploadFiles(file: File) {
-  "use server";
-  const utapi = new UTApi();
-  const response = await utapi.uploadFiles(file);
-  return response
+  "use server"
+  const arrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+
+  const response = await new Promise<CloudinaryResource>((resolve, reject) => {
+    cloudinary.uploader.upload_stream({
+      tags: ['profile-image'],
+      upload_preset: 'eeij9vkt'
+    }, function (error, result) {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(result as CloudinaryResource);
+    })
+    .end(buffer);
+  });
+
+  console.log(response.secure_url)
+  return response;
+
 }
 
 export default async function page({ params }: { params: { userId: string } }) {
@@ -30,7 +63,7 @@ export default async function page({ params }: { params: { userId: string } }) {
     let profileImageUrl = "";
     if (profileImageData instanceof File) {
       const response = await uploadFiles(profileImageData);
-      profileImageUrl = response.data.url;
+      profileImageUrl = response.secure_url || ""; //this be dangerous fr pero we cramming
     }
 
     try {

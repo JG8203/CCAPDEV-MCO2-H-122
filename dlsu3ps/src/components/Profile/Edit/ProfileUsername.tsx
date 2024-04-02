@@ -5,8 +5,8 @@ export default function ProfileUsername({ username, profileLink, bio }: { userna
         <>
             <div className="flex flex-col md:flex-row md:items-center rounded-lg overflow-hidden mb-6">
                 <div className="md:flex-shrink-0">
-                    <div className="h-48 w-full md:w-48 bg-dim-gray">
-                        <Image src={profileLink} alt="Profile Picture" width={200} height={200} />
+                    <div className="h-52 w-52 bg-dim-gray">
+                        <Image src={profileLink} alt="Profile Picture" width={208} height={208} />
                     </div>
                 </div>
                 <div className="p-8">

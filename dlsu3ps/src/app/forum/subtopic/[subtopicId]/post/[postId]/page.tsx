@@ -72,7 +72,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
   return (
     <main className="flex flex-col justify-center items-center p-9">
 
-      <div className='rounded-md shadow w-8/12'>{/*change width to resize*/}
+      <div className='rounded-md w-11/12'>
         <div className='px-2 py-2 flex justify-between'>
           <Vote postId={params.postId} subtopicId={params.subtopicId} />
           <article className="overflow-x-auto flex-col w-11/12">

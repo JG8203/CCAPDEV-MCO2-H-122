@@ -3,22 +3,25 @@ import { Post } from '@prisma/client';
 import Link from 'next/link';
 import prisma from '@/app/lib/prisma';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
+import { redirect } from "next/navigation";
+
 async function getPostCommentsCount(postId: string) {
     const postWithCommentsCount = await prisma.post.findUnique({
-      where: {
-        id: postId,
-      },
-      include: {
-        _count: {
-          select: { comments: true },
+        where: {
+            id: postId,
         },
-      },
+        include: {
+            _count: {
+                select: { comments: true },
+            },
+        },
     });
-  
+
     return postWithCommentsCount?._count.comments;
-  }
+}
 
 async function deletePost(postId: string) {
+    "use server"
     await prisma.post.update({
         where: {
             id: postId,
@@ -33,20 +36,14 @@ async function deletePost(postId: string) {
 export default async function ForumRow({ post, subtopicId }: { post: Post; subtopicId: string }) {
     const commentsCount = getPostCommentsCount(post.id);
     const {
-        getAccessToken,
-        getBooleanFlag,
-        getFlag,
-        getIdToken,
-        getIntegerFlag,
-        getOrganization,
-        getPermission,
         getPermissions,
-        getStringFlag,
-        getUser,
-        getUserOrganizations,
-        isAuthenticated
     } = getKindeServerSession();
-    console.log(await getPermissions());
+    async function handleDeletePost(formData : FormData) {
+        "use server"
+        const postId = formData.get('postId');
+        await deletePost(postId as string);
+        redirect(`/forum/subtopic/${subtopicId}/`);
+    }
     return (
         <>
             <tr className="border-b-2 border-olive">
@@ -67,7 +64,15 @@ export default async function ForumRow({ post, subtopicId }: { post: Post; subto
                 <td className="py-4 px-6">
                     {commentsCount}
                 </td>
-                {isAuthenticated && (await getPermissions())?.permissions.includes('delete-perm') && <div> <button>Delete</button> </div>}
+                {(await getPermissions())?.permissions.includes('delete-perm') &&
+                    <td className="py-4 px-6">
+                        <div>
+                            <form action={handleDeletePost}>
+                                <input type="hidden" name="postId" value={post.id} />
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </td>}
             </tr>
         </>
     );

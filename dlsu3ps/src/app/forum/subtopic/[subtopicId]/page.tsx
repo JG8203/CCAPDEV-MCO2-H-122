@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { subtopicId: string } 
   
   return (
     <div className="bg-beige font-roboto text-base text-gray-800 align-center min-h-screen flex flex-col w-screen">
-        {subtopic && <ForumBox subtopic={subtopic} posts={filteredPosts}/>}
+        {subtopic && <ForumBox subtopic={subtopic} posts={filteredPosts}/>} {/* shoudlve used composition here but we crammed too much */}
     </div>
   );
 }
