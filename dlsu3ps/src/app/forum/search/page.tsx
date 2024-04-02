@@ -3,7 +3,8 @@ import prisma from "@/app/lib/prisma";
 import SubtopicTable from "@/components/topics/SubtopicTable";
 import SearchBar from "@/components/SearchBar";
 import SearchList from "@/components/Forum/SearchList";
-export default async function Page() {
+export default async function Page({searchParams} : {searchParams?: { query? : string};
+}) {
 const query = searchParams?.query || "";
 
 
