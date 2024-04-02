@@ -6,29 +6,6 @@ export default async function CreatePost({params}: {params: {subtopicId: string}
     const {getUser} = getKindeServerSession();
     const userObject = await getUser();
     const kindeId = userObject?.id;
-
-    // async function createPost(title: string, content: string, subtopicId: string) {
-    //     try {
-    //         const user = await prisma.user.findUnique({
-    //             where: {
-    //                 kindeId: kindeId!,
-    //             },
-    //         });
-    //         const post = await prisma.post.create({
-    //             data: {
-    //                 title,
-    //                 content,
-    //                 authorId: user?.id!,
-    //                 subtopicId,
-    //             },
-    //         });
-    //     } catch (error) {
-    //         console.error('Failed to create post:', error);
-    //     } finally {
-    //         redirect(`/forum/subtopic/${subtopicId}`);
-    //     }
-    // }
-
     async function formAction(formData: FormData) {
         "use server";
 
@@ -42,7 +19,7 @@ export default async function CreatePost({params}: {params: {subtopicId: string}
                     kindeId: kindeId!,
                 },
             });
-            const post = await prisma.post.create({
+            await prisma.post.create({
                 data: {
                     title,
                     content,

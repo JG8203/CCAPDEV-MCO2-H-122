@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.1.15",
+    "@mdxeditor/editor": "^2.19.0",
     "@prisma/client": "^5.10.2",
     "@uploadthing/react": "^6.4.0",
     "cloudinary": "^2.1.0",
