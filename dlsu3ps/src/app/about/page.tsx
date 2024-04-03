@@ -1,5 +1,3 @@
-import NavBar from "@/components/NavBar";
-
 export default function About(){
     return (
         <div className="bg-beige font-roboto m-0 p-0 h-screen flex flex-col">
