@@ -1,80 +1,36 @@
-# CCAPDEV-MCO2-H-122
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-To run, type:
+## Getting Started
 
-npm i
+First, run the development server:
 
+```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-# Deployment
-```"use client";
-import { useState } from 'react';
-import {formActionComment} from "@/app/api/serverActions";
-import { MentionsInput, Mention } from "react-mentions";
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-type Props = {
-    users: string[],
-    subtopicId: string,
-    postId : string,
-}
-export  function CommentBox({users, subtopicId, postId} : Props) {
-    const [content, setContent] = useState('');
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('content', content);
-        await formActionComment({ params: { subtopicId, postId, formData } });
-    }
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Learn More
 
-    return (
-        <form onSubmit={handleSubmit} className="w-6/12">
+To learn more about Next.js, take a look at the following resources:
 
-                <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
-                <div className="flex items-center w-full"> {/* Added w-full here */}
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-                    <div className="flex flex-col flex-grow ml-4">
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-                        <MentionsInput value={content} onChange={setContent}>
-                            <Mention
-                                trigger="@"
-                                data={users}
-                                renderSuggestion={(suggestion, search, highlightedDisplay, index, focused) => (
-                                    <div className={`user ${focused ? 'focused' : ''}`}>
-                                        {highlightedDisplay}
-                                    </div>
-                                )}
-                            />
-                            {/*<Mention*/}
-                            {/*    trigger="#"*/}
-                            {/*    data={tags}*/}
-                            {/*    renderSuggestion={(suggestion, search, highlightedDisplay, index, focused) => (*/}
-                            {/*        <div className={`tag ${focused ? 'focused' : ''}`}>*/}
-                            {/*            {highlightedDisplay}*/}
-                            {/*        </div>*/}
-                            {/*    )}*/}
-                            {/*/>*/}
-                        </MentionsInput>
-                    </div>
-                </div>
-                {/* Comment Section */}
-                <main className=''>
-                    <div className="flex flex-col p-5">
-                        <label htmlFor="post-content" className="text-2xl py-2 font-semibold"></label>
-                        <div className="flex items-center">
+## Deploy on Vercel
 
-                            <div className="w-full flex justify-end mt-4 ">
-                                <button
-                                    className="bg-olive border-4 rounded-lg hover:border-double  border-beige text-white font-bold py-3 px-4 focus:outline-none focus:shadow-outline"
-                                    type="submit">
-                                    Create Comment
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-        </form>
-    );
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-}````
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
