@@ -32,10 +32,7 @@ export default async function SearchList({query}: {query: string}) {
                             </div>
                         ))
                     )}
-
-
                     <div className="flex justify-center w-full p-10">
-
                 </div>
             </div>
         </>
