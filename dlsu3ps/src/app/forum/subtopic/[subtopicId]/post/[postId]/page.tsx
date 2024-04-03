@@ -8,7 +8,7 @@ import { notFound, redirect } from 'next/navigation';
 import EditDelete from '@/components/ForumPost/EditDelete';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import EditDeleteComment from "@/components/ForumPost/EditDeleteComment";
-import {TimeAgo} from "@/components/ForumPost/TimeAgo";
+import { TimeAgo } from "@/components/ForumPost/TimeAgo";
 import VoteComment from "@/components/ForumPost/VoteComment";
 async function getPost(postId: string) {
   const post = await prisma.post.findUnique({
@@ -80,12 +80,11 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               <PostHeader title={fetchedPost.title} />
               {currentUser?.id === fetchedPost.user.id && <EditDelete postId={params.postId} subtopicId={params.subtopicId} />}
               <div className="border-b-2 border-olive flex p-3" >
-                {/* Make it so that this only accepts the user object instead of the user id */}
                 <UserProfile
-                    author={fetchedPost.user?.username}
-                    profileImageUrl={profileImageUrl}
-                    joinDate={fetchedPost.user.createdAt}
-                    userId={fetchedPost.user?.id}
+                  author={fetchedPost.user?.username}
+                  profileImageUrl={profileImageUrl}
+                  joinDate={fetchedPost.user.createdAt}
+                  userId={fetchedPost.user?.id}
                 />
 
                 <PostContent date={fetchedPost.date}>{fetchedPost.content}</PostContent>
@@ -102,59 +101,59 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                 },
               });
               return (
-                  <div key={comment.id}>
-                    <div className="border border-x-2 border-b-2 border-olive flex p-4">
-                      {/*<VoteComment postId={params.postId} subtopicId={params.subtopicId} commentId={comment.id}/>*/}
-                      {/*Vote comment dito not working pa*/}
-                      <div className="flex-row">
-                        <UserProfile
-                            author={user?.username || ''}
-                            profileImageUrl={user?.profileImage || ''}
-                            joinDate={user?.createdAt || new Date()}
-                            userId={user?.id || ''}
-                        />
-                        <div className="font-light italic mt-3">
-                          {/*{new Date(comment.date).toLocaleString()}*/} {/*previous date*/}
-                          {TimeAgo(comment.date)}
-                        </div>
+                <div key={comment.id}>
+                  <div className="border border-x-2 border-b-2 border-olive flex p-4">
+                    {/*<VoteComment postId={params.postId} subtopicId={params.subtopicId} commentId={comment.id}/>*/}
+                    {/*Vote comment dito not working pa*/}
+                    <div className="flex-row">
+                      <UserProfile
+                        author={user?.username || ''}
+                        profileImageUrl={user?.profileImage || ''}
+                        joinDate={user?.createdAt || new Date()}
+                        userId={user?.id || ''}
+                      />
+                      <div className="font-light italic mt-3">
+                        {/*{new Date(comment.date).toLocaleString()}*/} {/*previous date*/}
+                        {TimeAgo(comment.date)}
                       </div>
-
-
-                      <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
-                        {comment.content}
-                      </div>
-
-                      {currentUser?.id === comment.authorId &&
-                          <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
-                                             commentId={comment.id}/>}
                     </div>
+
+
+                    <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
+                      {comment.content}
+                    </div>
+
+                    {currentUser?.id === comment.authorId &&
+                      <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
+                        commentId={comment.id} />}
                   </div>
+                </div>
               );
             })}
           </article>
         </div>
       </div>
 
-      <form action={formAction} method="POST" className="w-6/12">
+      <form action={formAction} className="w-6/12">
         <div className="w-full flex flex-col p-5">
           <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
           <div className="flex items-center w-full"> {/* Added w-full here */}
             <div className="flex-shrink-0 p-3">
               <UserProfile
-                  author={currentUser?.username || ''}
-                  profileImageUrl={currentUser?.profileImage || ''}
-                  joinDate={currentUser?.createdAt || new Date()}
-                  userId={currentUser?.id || ''}
+                author={currentUser?.username || ''}
+                profileImageUrl={currentUser?.profileImage || ''}
+                joinDate={currentUser?.createdAt || new Date()}
+                userId={currentUser?.id || ''}
               />
             </div>
             <div className="flex flex-col flex-grow ml-4">
-                <textarea
-                    className="resize-none bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna p-5"
-                    name="content"
-                    rows={10}
-                    required
-                    minLength={20}
-                ></textarea>
+              <textarea
+                className="resize-none bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna p-5"
+                name="content"
+                rows={10}
+                required
+                minLength={20}
+              ></textarea>
             </div>
           </div>
           {/* Comment Section */}
@@ -164,17 +163,17 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               <div className="flex items-center">
 
                 <div className="w-full flex justify-end mt-4 ">
-                            <button
-                                className="bg-olive border-4 rounded-lg hover:border-double  border-beige text-white font-bold py-3 px-4 focus:outline-none focus:shadow-outline"
-                                type="submit">
-                                Create Comment
-                            </button>
-                        </div>
-                    </div>
+                  <button
+                    className="bg-olive border-4 rounded-lg hover:border-double  border-beige text-white font-bold py-3 px-4 focus:outline-none focus:shadow-outline"
+                    type="submit">
+                    Create Comment
+                  </button>
                 </div>
-            </main>
+              </div>
+            </div>
+          </main>
         </div>
-        </form>
+      </form>
     </main>
   );
 }

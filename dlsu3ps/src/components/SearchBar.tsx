@@ -2,7 +2,7 @@ import prisma from "@/app/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Post } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-export default async function SearchBar(className: string | undefined){
+export default async function SearchBar(){
     return (
             <form className="w-4/12 ml-5">
                 <div className="flex">

@@ -24,7 +24,6 @@ export default async function UserProfileBio({ user }: { user: User }) {
                     
                 />
             </div>
-
             <div className="text-center mb-4">
                 <p className="text-white font-bold">{user.username}</p>
                 <p className="text-slate-200 font-semibold italic">{user.favoriteCat || "No fave cat :("}</p>
