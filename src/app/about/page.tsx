@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 export default function About() {
     return (
@@ -45,6 +46,9 @@ export default function About() {
                             <li>unique-username-generator: Package for generating unique usernames.</li>
                             <li>zod: TypeScript-first schema declaration and validation library.</li>
                         </ul>
+                    </div>
+                    <div className="text-xl text-slate-400">
+                    <Link className="text-xl text-slate-700" href="https://github.com/JG8203/CCAPDEV-MCO2-H-122"> Link to Repo </Link>
                     </div>
                 </div>
             </div>
