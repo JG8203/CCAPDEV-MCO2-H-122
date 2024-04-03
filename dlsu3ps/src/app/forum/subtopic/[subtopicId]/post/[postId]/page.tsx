@@ -96,25 +96,29 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                                 joinDate={user?.createdAt || new Date()}
                                 userId={user?.id || ''}
                             />
-                            <div className="font-light italic mt-3">
+                          </div>
+                          
+                          <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
+                            <div className="post-content py-6 px-6 overflow-hidden block w-full">
+                              {comment.content.split(' ').map((word, index) => {
+                                if (word.startsWith('@[')) {
+                                  const username = word.slice(2, word.indexOf(']'));
+                                  const user = usersList.find(user => user.username === username);
+                                  return user ? <span key={index}><b><Link href={`/profile/${user.id}`}>@{username} </Link></b></span> : word + ' ';
+                                } else {
+                                  return word + ' ';
+                                }
+                              })}
+                            </div>
+
+                            <div className="p-6 font-light italic mt-3">
                               {TimeAgo(comment.date)}
                             </div>
                           </div>
-                          <div className="post-content py-6 px-6 overflow-hidden block w-full">
-                            {comment.content.split(' ').map((word, index) => {
-                              if (word.startsWith('@[')) {
-                                const username = word.slice(2, word.indexOf(']'));
-                                const user = usersList.find(user => user.username === username);
-                                return user ? <span key={index}><b><Link href={`/profile/${user.id}`}>@{username} </Link></b></span> : word + ' ';
-                              } else {
-                                return word + ' ';
-                              }
-                            })}
-                          </div>
 
                           {currentUser?.id === comment.authorId &&
-                              <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
-                                                 commentId={comment.id} content={comment.content}/>}
+                                <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
+                                                  commentId={comment.id} content={comment.content}/>}
                         </div>
                     ) : (
                         <div className="border border-x-2 border-b-2 border-olive flex p-4">
