@@ -32,8 +32,8 @@ export default function CreateFields({defaultText}: {defaultText: string}) {
                             imageUploadHandler: async (image: File) => {
                               const formData = new FormData();
                               formData.append('file', image);
-                              formData.append('upload_preset', 'post-image'); // Using the unsigned upload preset
-                              formData.append('cloud_name', 'dtm4om1g2'); // Your Cloudinary cloud name
+                              formData.append('upload_preset', 'post-image');
+                              formData.append('cloud_name', 'dtm4om1g2');
                           
                               try {
                                 const response = await fetch(`https://api.cloudinary.com/v1_1/dtm4om1g2/image/upload`, { // POST request to Cloudinary's upload endpoint

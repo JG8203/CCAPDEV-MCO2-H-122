@@ -49,7 +49,7 @@ export default async function ForumRow({ post, subtopicId }: { post: Post; subto
     const processedContent = await remark()
     .use(html)
     .use(() => {
-        return (tree: any) => { // Update the type of the 'tree' parameter
+        return (tree: any) => { 
             tree.children = tree.children.filter((node: any) => { // Update the type of the 'node' parameter
                 return node.type !== 'image';
             });
@@ -57,6 +57,7 @@ export default async function ForumRow({ post, subtopicId }: { post: Post; subto
     })
     .process(post.content);
     const contentHtml = processedContent.toString();
+    const filteredContentHtml = contentHtml.replace(/<img\b[^>]*>/gi, '');
     console.log(contentHtml);
     return (
         <>
@@ -68,7 +69,7 @@ export default async function ForumRow({ post, subtopicId }: { post: Post; subto
                             <div className="font-medium text-olive hover:text-gray-800">
                                 <Link href={`/forum/subtopic/${subtopicId}/post/${post.id}`}>{post.title}</Link>
                             </div>
-                            <div className="font-small text-dim-gray font-normal line-clamp-2" dangerouslySetInnerHTML={{__html: contentHtml}}>
+                            <div className="font-small text-dim-gray font-normal line-clamp-2" dangerouslySetInnerHTML={{__html: filteredContentHtml}}>
                             </div>
                         </div>
                     </div>

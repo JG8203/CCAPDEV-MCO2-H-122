@@ -73,7 +73,7 @@ export default function CreateFields({defaultTitle, defaultContent}: {defaultTit
                     className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline m-5"
                     type="submit"
                 >
-                    Create Post
+                    Edit Post
                 </button>
             </div>
         </>
