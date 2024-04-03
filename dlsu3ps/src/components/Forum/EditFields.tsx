@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import { MDXEditor, UndoRedo, BoldItalicUnderlineToggles, toolbarPlugin, imagePlugin, InsertImage } from '@mdxeditor/editor';
 import '@mdxeditor/editor/style.css';
 
-export default function CreateFields({defaultText}: {defaultText: string}) {
-    const [markdown, setMarkdown] = useState(defaultText);
+export default function CreateFields({defaultTitle, defaultContent}: {defaultTitle: string, defaultContent: string}) {
+    const [markdown, setMarkdown] = useState(defaultContent);
+
     return (
         <>
             <div className="text-4xl font-bold text-burnt-sienna p-5">
@@ -20,6 +21,7 @@ export default function CreateFields({defaultText}: {defaultText: string}) {
                     placeholder="Where is Casper?"
                     required
                     minLength={5}
+                    defaultValue={defaultTitle}
                 />
             </div>
             <div className="flex flex-col p-5">

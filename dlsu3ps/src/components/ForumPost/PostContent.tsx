@@ -7,15 +7,17 @@ interface PostContentProps {
     date: Date; // assuming date is passed as a prop
 }
 
-const PostContent: React.FC<PostContentProps> = async ({ children, date }) => {
+async function PostContent({ children, date } : PostContentProps) {
     const processedContent = await remark()
-    .use(html)
-    .process(children);
+        .use(html)
+        .process(children);
+
     const contentHtml = processedContent.toString();
-    console.log(contentHtml);
+    const modifiedContentHtml = contentHtml.replace(/<img/g, '<img style="max-height: 500px;"');
+
     return (
         <div className="post-content py-4 px-6 overflow-hidden flex flex-col w-full">
-            <div className="text-black" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+            <div className="text-black" dangerouslySetInnerHTML={{ __html: modifiedContentHtml }} />
             <div className="font-light italic mt-3">
                 {TimeAgo(date)}
             </div>

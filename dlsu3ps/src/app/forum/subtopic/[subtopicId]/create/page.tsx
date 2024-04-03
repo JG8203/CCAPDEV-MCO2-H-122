@@ -7,6 +7,17 @@ export default async function CreatePost({params}: {params: {subtopicId: string}
     const {getUser} = getKindeServerSession();
     const userObject = await getUser();
     const kindeId = userObject?.id;
+
+    async function uploadImage(image: File) {
+        "use server"
+        console.log("Received image:", image)
+        return new Promise<string>((resolve, reject) => {
+            setTimeout(() => {
+                resolve('https://via.placeholder.com/150');
+            }, 1000);
+        });
+    }
+
     async function formAction(formData: FormData) {
         "use server";
 

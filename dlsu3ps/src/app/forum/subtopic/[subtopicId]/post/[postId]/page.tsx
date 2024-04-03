@@ -27,14 +27,18 @@ async function getPost(postId: string) {
 export default async function Page({ params }: { params: { subtopicId: string, postId: string } }) {
   const { getUser } = getKindeServerSession();
   const userObject = await getUser();
-  const fetchedPost = await getPost(params.postId);
-  const currentUser = await prisma.user.findUnique({
-    where: {
-      kindeId: userObject?.id,
-    },
-  });
-  const kindeId = userObject?.id;
+  let currentUser: { id: string; kindeId: string; email: string; firstName: string; lastName: string; favoriteCat: string | null; profileImage: string | null; createdAt: Date; username: string; bio: string | null; } | null = null; // Declare currentUser outside try block to use it throughout the component
+  try {
+    currentUser = await prisma.user.findUnique({
+      where: {
+        kindeId: userObject?.id,
+      },
+    });
+  } catch (error) {
+    console.error("Error retrieving user object:", error);
+  }
 
+  const fetchedPost = await getPost(params.postId);
   if (!fetchedPost || fetchedPost.isDeleted) {
     return notFound();
   }
@@ -48,7 +52,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
     try {
       const user = await prisma.user.findUnique({
         where: {
-          kindeId: kindeId!,
+          kindeId: userObject?.id,
         },
       });
       const comment = await prisma.comment.create({
@@ -74,7 +78,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
 
       <div className='rounded-md w-11/12'>
         <div className='px-2 py-2 flex justify-between'>
-          <Vote postId={params.postId} subtopicId={params.subtopicId} />
+          {userObject && <Vote postId={params.postId} subtopicId={params.subtopicId} />}
           <article className="overflow-x-auto flex-col w-11/12">
             <section className="text-sm text-left text-gray-500 overflow-ellipsis border-x-2 border-olive">
               <PostHeader title={fetchedPost.title} />
@@ -134,46 +138,48 @@ export default async function Page({ params }: { params: { subtopicId: string, p
         </div>
       </div>
 
-      <form action={formAction} className="w-6/12">
-        <div className="w-full flex flex-col p-5">
-          <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
-          <div className="flex items-center w-full"> {/* Added w-full here */}
-            <div className="flex-shrink-0 p-3">
-              <UserProfile
-                author={currentUser?.username || ''}
-                profileImageUrl={currentUser?.profileImage || ''}
-                joinDate={currentUser?.createdAt || new Date()}
-                userId={currentUser?.id || ''}
-              />
-            </div>
-            <div className="flex flex-col flex-grow ml-4">
-              <textarea
-                className="resize-none bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna p-5"
-                name="content"
-                rows={10}
-                required
-                minLength={20}
-              ></textarea>
-            </div>
-          </div>
-          {/* Comment Section */}
-          <main className=''>
-            <div className="flex flex-col p-5">
-              <label htmlFor="post-content" className="text-2xl py-2 font-semibold"></label>
-              <div className="flex items-center">
-
-                <div className="w-full flex justify-end mt-4 ">
-                  <button
-                    className="bg-olive border-4 rounded-lg hover:border-double  border-beige text-white font-bold py-3 px-4 focus:outline-none focus:shadow-outline"
-                    type="submit">
-                    Create Comment
-                  </button>
-                </div>
+      {userObject && (
+        <form action={formAction} className="w-6/12">
+          <div className="w-full flex flex-col p-5">
+            <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
+            <div className="flex items-center w-full"> {/* Added w-full here */}
+              <div className="flex-shrink-0 p-3">
+                <UserProfile
+                  author={currentUser?.username || ''}
+                  profileImageUrl={currentUser?.profileImage || ''}
+                  joinDate={currentUser?.createdAt || new Date()}
+                  userId={currentUser?.id || ''}
+                />
+              </div>
+              <div className="flex flex-col flex-grow ml-4">
+                <textarea
+                  className="resize-none bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna p-5"
+                  name="content"
+                  rows={10}
+                  required
+                  minLength={20}
+                ></textarea>
               </div>
             </div>
-          </main>
-        </div>
-      </form>
+            {/* Comment Section */}
+            <main className=''>
+              <div className="flex flex-col p-5">
+                <label htmlFor="post-content" className="text-2xl py-2 font-semibold"></label>
+                <div className="flex items-center">
+
+                  <div className="w-full flex justify-end mt-4 ">
+                    <button
+                      className="bg-olive border-4 rounded-lg hover:border-double  border-beige text-white font-bold py-3 px-4 focus:outline-none focus:shadow-outline"
+                      type="submit">
+                      Create Comment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </form>
+      )}
     </main>
   );
 }
