@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Comment {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorId String   @db.ObjectId
+  content  String
+  date     DateTime @db.Date
+  postId   String   @db.ObjectId
+  post     Post     @relation(fields: [postId], references: [id])
+  isDeleted Boolean @default(false) @map("is_deleted")
+  upvotes   String[] @db.ObjectId
+  downvotes String[] @db.ObjectId
+  user       User      @relation(fields: [authorId], references: [id])
+}
+
+model Post {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  authorId   String    @db.ObjectId
+  content    String
+  date       DateTime  @default(now()) @map("date")
+  downvotes  String[]  @db.ObjectId
+  subtopicId String    @db.ObjectId
+  title      String
+  upvotes    String[]  @db.ObjectId
+  user       User      @relation(fields: [authorId], references: [id])
+  comments   Comment[]
+  isDeleted  Boolean   @default(false) @map("is_deleted")
+}
+
+model Subtopic {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  desc    String
+  name    String
+  topicId String @db.ObjectId
+  topic   Topic  @relation(fields: [topicId], references: [id])
+}
+
+model Topic {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  subtopics Subtopic[]
+}
+
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  kindeId      String   @unique
+  email        String   @unique
+  firstName    String
+  lastName     String
+  favoriteCat  String?  @default("") @map("favorite_cat")
+  profileImage String?  @default("") @map("profile_image")
+  posts        Post[]
+  createdAt    DateTime @default(now()) @map("created_at")
+  comments     Comment[]
+  username     String   @unique
+  bio          String?   @default("")
+}
