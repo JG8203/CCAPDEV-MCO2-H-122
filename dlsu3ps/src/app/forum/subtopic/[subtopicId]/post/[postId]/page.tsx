@@ -10,14 +10,17 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import EditDeleteComment from "@/components/ForumPost/EditDeleteComment";
 import { TimeAgo } from "@/components/ForumPost/TimeAgo";
 import VoteComment from "@/components/ForumPost/VoteComment";
+import {CommentBox} from "@/components/ForumPost/CommentBox";
+import {Post} from "@prisma/client";
 
 async function getPost(postId: string) {
   const post = await prisma.post.findUnique({
     where: { id: postId },
     include: {
-      user: true,
-      comments: true,
-    }
+      user: true, // This includes the user of the post
+      comments: {
+        include: {user : true}
+      }      }
   });
   if (!post) {
     return null;
@@ -40,42 +43,17 @@ export default async function Page({ params }: { params: { subtopicId: string, p
   }
 
   const fetchedPost = await getPost(params.postId);
+  let usersList = fetchedPost?.comments.map(comment => comment.user) || [];
+  let usernamesList = Array.from(new Set(usersList.map(user => user.username)));
+  usernamesList = usernamesList.filter(username => username !== currentUser?.username);
+
+  console.log(usernamesList);
+
   if (!fetchedPost || fetchedPost.isDeleted) {
     return notFound();
   }
 
-
-  async function formAction(formData: FormData) {
-    "use server";
-
-    const content = formData.get('content');
-    const postId = params.postId;
-
-    try {
-      const user = await prisma.user.findUnique({
-        where: {
-          kindeId: userObject?.id,
-        },
-      });
-      const comment = await prisma.comment.create({
-        data: {
-          content: content as string,
-          authorId: user?.id!,
-          postId: postId,
-          date: new Date()
-        },
-      });
-    } catch (error) {
-      console.error('Failed to create post:', error);
-    } finally {
-      const { subtopicId, postId } = params;
-      redirect(`/forum/subtopic/${subtopicId}/post/${postId}`);
-    }
-  }
-
   const profileImageUrl = fetchedPost.user?.profileImage || '';
-
-
 
   return (
     <main className="flex flex-col justify-center items-center p-9">
@@ -98,13 +76,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
 
               </div>
             </section>
-            {/* inefficient i think */}
-            {/*{fetchedPost.comments.filter(comment => !comment.isDeleted).map(async (comment) => {*/}
-            {/*  const user = await prisma.user.findUnique({*/}
-            {/*    where: {*/}
-            {/*      id: comment.authorId,*/}
-            {/*    },*/}
-            {/*  });*/}
+
             {fetchedPost.comments.filter(comment => comment).map(async (comment) => {
               const user = await prisma.user.findUnique({
                 where: {
@@ -112,87 +84,64 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                 },
               });
               return (
-                <div key={comment.id}>
-                  {!comment.isDeleted ? <div className="border border-x-2 border-b-2 border-olive flex p-4">
-                    {/*<VoteComment postId={params.postId} subtopicId={params.subtopicId} commentId={comment.id}/>*/}
-                    {/*Vote comment dito not working pa*/}
-                    <div className="flex-row">
-                      <UserProfile
-                        author={user?.username || ''}
-                        profileImageUrl={user?.profileImage || ''}
-                        joinDate={user?.createdAt || new Date()}
-                        userId={user?.id || ''}
-                      />
-                      <div className="font-light italic mt-3">
-                        {/*{new Date(comment.date).toLocaleString()}*/} {/*previous date*/}
-                        {TimeAgo(comment.date)}
-                      </div>
-                    </div>
+                  <div key={comment.id}>
+                    {!comment.isDeleted ? (
+                        <div className="border border-x-2 border-b-2 border-olive flex p-4">
+                          <div className="flex-row">
+                            <UserProfile
+                                author={user?.username || ''}
+                                profileImageUrl={user?.profileImage || ''}
+                                joinDate={user?.createdAt || new Date()}
+                                userId={user?.id || ''}
+                            />
+                            <div className="font-light italic mt-3">
+                              {TimeAgo(comment.date)}
+                            </div>
+                          </div>
+                          <div className="post-content py-6 px-6 overflow-hidden block w-full">
+                            {comment.content.split(' ').map((word, index) => {
+                              if (word.startsWith('@[')) {
+                                const username = word.slice(2, word.indexOf(']'));
+                                const user = usersList.find(user => user.username === username);
+                                return user ? <span key={index}><b><Link href={`/profile/${user.id}`}>@{username} </Link></b></span> : word + ' ';
+                              } else {
+                                return word + ' ';
+                              }
+                            })}
+                          </div>
 
-
-                    <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full">
-                      {comment.content}
-                    </div>
-
-                    {currentUser?.id === comment.authorId &&
-                      <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
-                        commentId={comment.id} content={comment.content} />}
-                  </div> : <div className="border border-x-2 border-b-2 border-olive flex p-4">
-                    <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full items-center">
-                      This comment has been deleted.
-                    </div>
+                          {currentUser?.id === comment.authorId &&
+                              <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
+                                                 commentId={comment.id} content={comment.content}/>}
+                        </div>
+                    ) : (
+                        <div className="border border-x-2 border-b-2 border-olive flex p-4">
+                          <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full items-center">
+                            This comment has been deleted.
+                          </div>
+                        </div>
+                    )}
                   </div>
-                  }
-
-                </div>
               );
+
             })}
           </article >
         </div >
       </div >
 
-      {userObject && (
-        <form action={formAction} className="w-6/12">
-          <div className="w-full flex flex-col p-5">
-            <label htmlFor="post-content" className="text-2xl py-2 font-semibold">Comment</label>
-            <div className="flex items-center w-full"> {/* Added w-full here */}
-              <div className="flex-shrink-0 p-3">
-                <UserProfile
-                  author={currentUser?.username || ''}
-                  profileImageUrl={currentUser?.profileImage || ''}
-                  joinDate={currentUser?.createdAt || new Date()}
-                  userId={currentUser?.id || ''}
-                />
-              </div>
-              <div className="flex flex-col flex-grow ml-4">
-                <textarea
-                  className="resize-none bg-white appearance-none border-2 border-dim-gray rounded w-full h-48 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna p-5"
-                  name="content"
-                  rows={10}
-                  required
-                  minLength={20}
-                ></textarea>
-              </div>
-            </div>
-            {/* Comment Section */}
-            <main className=''>
-              <div className="flex flex-col p-5">
-                <label htmlFor="post-content" className="text-2xl py-2 font-semibold"></label>
-                <div className="flex items-center">
-
-                  <div className="w-full flex justify-end mt-4 ">
-                    <button
-                      className="bg-olive border-4 rounded-lg hover:border-double  border-beige text-white font-bold py-3 px-4 focus:outline-none focus:shadow-outline"
-                      type="submit">
-                      Create Comment
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </main>
+      {userObject && (<div className="flex w-6/12">
+        <div className="w-full flex p-5">
+          <div className="flex-shrink-0 p-3">
+            <UserProfile
+                author={currentUser?.username || ''}
+                profileImageUrl={currentUser?.profileImage || ''}
+                joinDate={currentUser?.createdAt || new Date()}
+                userId={currentUser?.id || ''}
+            />
           </div>
-        </form>
-      )}
-    </main >
+          <CommentBox postId={params.postId} subtopicId={params.subtopicId} users={usernamesList}/>
+        </div>
+      </div>)}
+    </main>
   );
 }
