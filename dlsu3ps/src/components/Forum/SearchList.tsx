@@ -3,9 +3,16 @@ import prisma from "@/app/lib/prisma";
 import { Post } from '@prisma/client';
 import UserPostsRow from "@/components/Profile/UserPostsRow";
 import ForumRow from "@/components/Forum/ForumRow";
+import Link from "next/link";
 
 export default async function SearchList({ query }: { query: string }) {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany(
+        {
+            where: {
+                isDeleted: false,
+            },
+        }
+    );
     const filteredPosts = posts.filter(post =>
         post.content.toLowerCase().includes(query.toLowerCase()) ||
         post.title.toLowerCase().includes(query.toLowerCase())
@@ -32,24 +39,18 @@ export default async function SearchList({ query }: { query: string }) {
                                 Content
                             </th>
                             <th scope="col" className="pt-5 pb-3 px-6">
-                                Subtopic
-                            </th>
-                            <th scope="col" className="pt-5 pb-3 px-6">
                                 Date
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {filteredPosts.map((post) => (
-                            <tr key={post.id} className="border-b border-olive">
+                            <tr key={post.id} className="border-b-1 border-olive">
                                 <td className="py-4 px-6">
-                                    {post.title}
+                                    <Link href={`/forum/subtopic/${post.subtopicId}/post/${post.id}`} >{post.title}</Link>
                                 </td>
                                 <td className="py-4 px-6">
                                     {post.content}
-                                </td>
-                                <td className="py-4 px-6">
-                                    {post.subtopicId} 
                                 </td>
                                 <td className="py-4 px-6">
                                     {new Date(post.date).toLocaleDateString()} {/* Adjust format as needed */}
