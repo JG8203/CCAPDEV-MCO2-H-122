@@ -5,7 +5,7 @@ import prisma from "@/app/lib/prisma";
 import SearchBar from "@/components/SearchBar";
 import Image from "next/image";
 import React from "react";
-import SearchList from "@/components/Forum/SearchList";
+
 export default async function NavBar() {
     const { isAuthenticated, getUser } = getKindeServerSession();
     const currentUser = await getUser();
