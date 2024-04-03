@@ -8,9 +8,6 @@ export default function ForumHeader({ topicName, subtopicId }: { topicName: stri
         <Link href={`/forum/subtopic/${subtopicId}/create`} className="mx-2 bg-burnt-sienna p-3 hover:bg-orange-800 rounded-md font-semibold text-white hover:text-slate-200">
           Create Post
         </Link>
-        <Link href={`/forum/subtopic/${subtopicId}/search`} className="mx-2 bg-burnt-sienna p-3 hover:bg-orange-800 rounded-md font-semibold text-white hover:text-slate-200">
-          Search
-        </Link>
       </div>
     </div>
   )
