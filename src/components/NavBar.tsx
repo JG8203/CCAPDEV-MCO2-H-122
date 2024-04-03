@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/app/lib/prisma";
 import SearchBar from "@/components/SearchBar";
@@ -46,10 +46,11 @@ export default async function NavBar() {
                 {await isAuthenticated() ? (
                     <>
                         <Link href={`/profile/${userObject?.id}`} className="text-beige no-underline mx-5 hover:text-gray-800">Profile</Link>
-                        <LogoutLink className="text-beige no-underline mx-5 hover:text-gray-800">Log out</LogoutLink>
+                        <LogoutLink className="text-beige no-underline mx-5 hover:text-gray-800" postLogoutRedirectURL="/">Log out</LogoutLink>
                     </>
                 ) : (
-                    <Link href="/login" className="text-beige no-underline mx-5 hover:text-gray-800">Login</Link>
+                    <LoginLink postLoginRedirectURL="/forum" className="text-beige no-underline mx-5 hover:text-gray-800">Sign in</LoginLink>
+                    
                 )}
             </nav>
         </header>
