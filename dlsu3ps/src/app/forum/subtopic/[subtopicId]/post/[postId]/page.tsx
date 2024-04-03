@@ -1,7 +1,7 @@
 import PostHeader from '@/components/ForumPost/PostHeader';
 import UserProfile from '@/components/ForumPost/UserProfile';
 import PostContent from '@/components/ForumPost/PostContent';
-import Vote from '@/components/ForumPost/Vote';
+import Vote from '@/components/ForumPost/VotePost';
 import prisma from '@/app/lib/prisma';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
@@ -116,6 +116,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
                   {!comment.isDeleted ? <div className="border border-x-2 border-b-2 border-olive flex p-4">
                     {/*<VoteComment postId={params.postId} subtopicId={params.subtopicId} commentId={comment.id}/>*/}
                     {/*Vote comment dito not working pa*/}
+                    <VoteComment postId={params.postId} commentId={comment.id} />
                     <div className="flex-row">
                       <UserProfile
                         author={user?.username || ''}
