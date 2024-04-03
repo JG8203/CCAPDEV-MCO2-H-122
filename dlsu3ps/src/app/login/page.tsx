@@ -1,8 +1,7 @@
-import NavBar from "@/components/NavBar";
 import EmailInput from "@/components/Login/EmailInput";
 import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-export default function LoginPage() {
+export default function Login() {
   return (
     <div className="flex justify-evenly items-center h-screen px-10">
       <div className="flex-grow">
