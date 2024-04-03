@@ -3,7 +3,6 @@ import prisma from "@/app/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Post } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-
 import {useSearchParams, usePathname, useRouter} from "next/navigation";
 import React, {FormEvent, useState} from "react";
 

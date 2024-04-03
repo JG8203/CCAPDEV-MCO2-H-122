@@ -1,6 +1,7 @@
 import prisma from "@/app/lib/prisma";
 import { redirect } from "next/navigation";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import EditFields from "@/components/Forum/EditFields";
 
 export default async function EditPost({ params }: { params: { postId: string, subtopicId: string } }) {
     const { getUser } = getKindeServerSession();
@@ -50,37 +51,7 @@ export default async function EditPost({ params }: { params: { postId: string, s
 
     return (
         <form action={formAction}>
-            <div className="text-4xl font-bold text-burnt-sienna p-5">
-                Edit Post
-            </div>
-            <div className="flex flex-col p-5">
-                <label htmlFor="post-title" className="text-2xl py-3 font-semibold">Title</label>
-                <input
-                    className="bg-white appearance-none border-2 border-dim-gray rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna"
-                    name="title"
-                    type="text"
-                    required
-                    minLength={5}
-                    defaultValue={post?.title} 
-                />
-                <label htmlFor="post-content" className="text-2xl py-3 font-semibold">Content</label>
-                <textarea
-                    className="bg-white appearance-none border-2 border-dim-gray rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-burnt-sienna"
-                    name="content"
-                    rows={20}
-                    required
-                    minLength={20}
-                    defaultValue={post?.content} 
-                ></textarea>
-            </div>
-            <div className="w-full flex justify-end">
-                <button
-                    className="bg-olive hover:bg-olive-light text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline m-5"
-                    type="submit"
-                >
-                    Update Post
-                </button>
-            </div>
+            <EditFields defaultTitle={post.title} defaultContent={post.content} />
         </form>
     );
 }

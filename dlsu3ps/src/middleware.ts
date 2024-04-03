@@ -8,8 +8,6 @@ export const config = {
     matcher: [
         "/profile/:path*", 
         "/forum/subtopic/:subtopicId/create", 
-        "/forum/subtopic/:subtopicId/post/:postId/create", 
         "/login/:path*",
-        "/forum/", 
     ]
 };
