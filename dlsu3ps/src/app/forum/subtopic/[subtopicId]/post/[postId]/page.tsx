@@ -16,8 +16,12 @@ async function getPost(postId: string) {
     where: { id: postId },
     include: {
       user: true,
-      comments: true,
-    }
+      comments: {
+        include: {
+          user: true,
+        },
+      },
+    },
   });
   if (!post) {
     return null;
@@ -74,8 +78,6 @@ export default async function Page({ params }: { params: { subtopicId: string, p
   }
 
   const profileImageUrl = fetchedPost.user?.profileImage || '';
-
-
 
   return (
     <main className="flex flex-col justify-center items-center p-9">

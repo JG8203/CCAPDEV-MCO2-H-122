@@ -14,6 +14,7 @@ export default function About(){
                 </p>
             </div>
         </div>
+        <h1> Tech Stack </h1>
         </div>
     );
 }

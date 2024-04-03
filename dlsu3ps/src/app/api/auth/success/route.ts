@@ -28,7 +28,7 @@ export async function GET() {
             }
         });
     }
-    return NextResponse.redirect("http://localhost:3000/forum");
+    return NextResponse.redirect("/forum");
 }
 
 export const dynamic = "force-dynamic"; //oh my god i hate myself
