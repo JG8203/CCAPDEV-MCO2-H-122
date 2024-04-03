@@ -2,6 +2,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/app/lib/prisma";
 import {redirect} from "next/navigation";
+import {KindeUser} from "@kinde-oss/kinde-auth-nextjs/types";
 
 export async function formActionDelete(commentId : string) {
     const { getUser } = getKindeServerSession();
@@ -74,5 +75,34 @@ export async function formActionDeletePost({ params }: { params: { postId: strin
     } finally {
         const { subtopicId } = params;
         redirect(`/forum/subtopic/${subtopicId}`);
+    }
+}
+export async function formActionComment({ params }: { params: { subtopicId: string, postId: string, formData: FormData} }) {
+    "use server";
+    const { getUser } = getKindeServerSession();
+    const userObject = await getUser();
+
+    const content = params.formData.get('content');
+    const postId = params.postId;
+
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                kindeId: userObject?.id, // Use userObject?.id directly
+            },
+        });
+        const comment = await prisma.comment.create({
+            data: {
+                content: content as string,
+                authorId: user?.id!,
+                postId: postId,
+                date: new Date()
+            },
+        });
+    } catch (error) {
+        console.error('Failed to create post:', error);
+    } finally {
+        const { subtopicId, postId } = params;
+        redirect(`/forum/subtopic/${subtopicId}/post/${postId}`);
     }
 }
