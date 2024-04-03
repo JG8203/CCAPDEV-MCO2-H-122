@@ -48,7 +48,6 @@ export default function About() {
                     </div>
                 </div>
             </div>
-            <h1> Tech Stack </h1>
         </div>
     );
 }
