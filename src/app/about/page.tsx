@@ -33,7 +33,9 @@ export default function About() {
                     <div>
                         <h2 className="text-2xl text-white font-semibold mb-2">Authentication:</h2>
                         <ul className="list-disc text-lg text-white ml-6">
-                            <li>@kinde-oss/kinde-auth-nextjs: Package for authentication in Next.js using Kinde authentication service.</li>
+                            <li>@kinde-oss/kinde-auth-nextjs: Package for authentication in Next.js using Kinde
+                                authentication service.
+                            </li>
                         </ul>
                     </div>
                     <div>
@@ -46,8 +48,7 @@ export default function About() {
                     </div>
                 </div>
             </div>
-        </div>
-        <h1> Tech Stack </h1>
+            <h1> Tech Stack </h1>
         </div>
     );
 }
