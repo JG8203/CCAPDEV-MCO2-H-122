@@ -10,6 +10,7 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import EditDeleteComment from "@/components/ForumPost/EditDeleteComment";
 import { TimeAgo } from "@/components/ForumPost/TimeAgo";
 import VoteComment from "@/components/ForumPost/VoteComment";
+
 async function getPost(postId: string) {
   const post = await prisma.post.findUnique({
     where: { id: postId },
@@ -43,6 +44,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
     return notFound();
   }
 
+
   async function formAction(formData: FormData) {
     "use server";
 
@@ -73,9 +75,10 @@ export default async function Page({ params }: { params: { subtopicId: string, p
 
   const profileImageUrl = fetchedPost.user?.profileImage || '';
 
+
+
   return (
     <main className="flex flex-col justify-center items-center p-9">
-
       <div className='rounded-md w-11/12'>
         <div className='px-2 py-2 flex justify-between'>
           {userObject && <Vote postId={params.postId} subtopicId={params.subtopicId} />}
@@ -95,10 +98,14 @@ export default async function Page({ params }: { params: { subtopicId: string, p
 
               </div>
             </section>
-
-            {/* I put here the CommentsSection with edit delete buttons */}
             {/* inefficient i think */}
-            {fetchedPost.comments.filter(comment => !comment.isDeleted).map(async (comment) => {
+            {/*{fetchedPost.comments.filter(comment => !comment.isDeleted).map(async (comment) => {*/}
+            {/*  const user = await prisma.user.findUnique({*/}
+            {/*    where: {*/}
+            {/*      id: comment.authorId,*/}
+            {/*    },*/}
+            {/*  });*/}
+            {fetchedPost.comments.filter(comment => comment).map(async (comment) => {
               const user = await prisma.user.findUnique({
                 where: {
                   id: comment.authorId,
@@ -106,7 +113,7 @@ export default async function Page({ params }: { params: { subtopicId: string, p
               });
               return (
                 <div key={comment.id}>
-                  <div className="border border-x-2 border-b-2 border-olive flex p-4">
+                  {!comment.isDeleted ? <div className="border border-x-2 border-b-2 border-olive flex p-4">
                     {/*<VoteComment postId={params.postId} subtopicId={params.subtopicId} commentId={comment.id}/>*/}
                     {/*Vote comment dito not working pa*/}
                     <div className="flex-row">
@@ -129,14 +136,20 @@ export default async function Page({ params }: { params: { subtopicId: string, p
 
                     {currentUser?.id === comment.authorId &&
                       <EditDeleteComment postId={params.postId} subtopicId={params.subtopicId}
-                        commentId={comment.id} />}
+                        commentId={comment.id} content={comment.content} />}
+                  </div> : <div className="border border-x-2 border-b-2 border-olive flex p-4">
+                    <div className="post-content py-6 px-6 overflow-hidden flex flex-col w-full items-center">
+                      This comment has been deleted.
+                    </div>
                   </div>
+                  }
+
                 </div>
               );
             })}
-          </article>
-        </div>
-      </div>
+          </article >
+        </div >
+      </div >
 
       {userObject && (
         <form action={formAction} className="w-6/12">
@@ -180,6 +193,6 @@ export default async function Page({ params }: { params: { subtopicId: string, p
           </div>
         </form>
       )}
-    </main>
+    </main >
   );
 }
