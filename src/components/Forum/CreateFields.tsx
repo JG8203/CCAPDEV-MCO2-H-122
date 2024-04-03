@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MDXEditor, UndoRedo, BoldItalicUnderlineToggles, toolbarPlugin, imagePlugin, InsertImage } from '@mdxeditor/editor';
+import { MDXEditor, UndoRedo, BoldItalicUnderlineToggles, toolbarPlugin, imagePlugin, InsertImage, tablePlugin, InsertTable } from '@mdxeditor/editor';
 import '@mdxeditor/editor/style.css';
 
-export default function CreateFields({defaultText}: {defaultText: string}) {
+export default function CreateFields({ defaultText }: { defaultText: string }) {
     const [markdown, setMarkdown] = useState(defaultText);
     return (
         <>
@@ -30,30 +30,32 @@ export default function CreateFields({defaultText}: {defaultText: string}) {
                     plugins={[
                         imagePlugin({
                             imageUploadHandler: async (image: File) => {
-                              const formData = new FormData();
-                              formData.append('file', image);
-                              formData.append('upload_preset', 'post-image');
-                              formData.append('cloud_name', 'dtm4om1g2');
-                          
-                              try {
-                                const response = await fetch(`https://api.cloudinary.com/v1_1/dtm4om1g2/image/upload`, { // POST request to Cloudinary's upload endpoint
-                                  method: 'POST',
-                                  body: formData,
-                                });
-                                const data = await response.json();
-                                console.log('Image uploaded:', data.secure_url);
-                                return data.secure_url; // This is the URL of the uploaded image
-                              } catch (error) {
-                                console.error('Failed to upload image:', error);
-                              }
+                                const formData = new FormData();
+                                formData.append('file', image);
+                                formData.append('upload_preset', 'post-image');
+                                formData.append('cloud_name', 'dtm4om1g2');
+
+                                try {
+                                    const response = await fetch(`https://api.cloudinary.com/v1_1/dtm4om1g2/image/upload`, { // POST request to Cloudinary's upload endpoint
+                                        method: 'POST',
+                                        body: formData,
+                                    });
+                                    const data = await response.json();
+                                    console.log('Image uploaded:', data.secure_url);
+                                    return data.secure_url; // This is the URL of the uploaded image
+                                } catch (error) {
+                                    console.error('Failed to upload image:', error);
+                                }
                             }
-                          }),
+                        }),
+                        tablePlugin(),
                         toolbarPlugin({
                             toolbarContents: () => (
                                 <>
                                     <UndoRedo />
                                     <BoldItalicUnderlineToggles />
                                     <InsertImage />
+                                    <InsertTable />
                                 </>
                             ),
                         }),
