@@ -18,26 +18,30 @@ export default async function SearchList({query}: {query: string}) {
                 No Posts Yet
                 </td>)}
 
-            <div className="bg-beige font-roboto text-base text-gray-800 align-center min-h-screen flex flex-col w-full max-h-svh">
-                {Array.isArray(posts) && filteredPosts.length === 0 ? (
-                    <td colSpan={2} className="text-center py-4 font-bold">
-                        No match found</td>
-                ) : (
-                    filteredPosts.map((post) => (
-                            <div key={post.id} className="flex flex-col">
-                                <div className="flex space-x-6 items-center">
-                                    <UserPostsRow post={post} />
-                                    <ForumRow post={post} subtopicId={post.subtopicId}/>
-                                </div>
-                            </div>
-                        ))
-                    )}
-
-
-                    <div className="flex justify-center w-full p-10">
-
+                <div className="" >
+                    <div className="flex flex-col justify-center items-center p-10">
+                    <table
+                        className="w-full text-sm text-left text-gray-500 table-auto overflow-ellipsis border-solid border-2 border-olive mb-20">
+                        <thead className="text-xs uppercase bg-olive text-beige">
+                            <tr>
+                            <th scope="col" className="pt-5 pb-4 px-9">
+                                Forum
+                            </th>
+                            
+                            <th scope="col" className="pt-5 pb-4 px-6">
+                                Threads
+                            </th>
+                            <th scope="col" className="pt-5 pb-4 px-6">
+                                Posts
+                            </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
         </>
     );
 }
