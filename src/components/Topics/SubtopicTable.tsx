@@ -10,13 +10,13 @@ export default function SubtopicTable({ subtopics }: { subtopics: Subtopic[] }) 
           <th scope="col" className="pt-5 pb-4 px-9">
             Forum
           </th>
-          
+{/*           
           <th scope="col" className="pt-5 pb-4 px-6">
             Threads
           </th>
           <th scope="col" className="pt-5 pb-4 px-6">
             Posts
-          </th>
+          </th> */}
         </tr>
       </thead>
       <tbody>

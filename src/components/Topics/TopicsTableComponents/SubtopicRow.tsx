@@ -13,8 +13,8 @@ export default function SubtopicRow({subtopic}: {subtopic: Subtopic}) {
     <tr className="border-b-2 border-olive">
         <SubtopicColumn subtopic={subtopic} />
         {/*<LatestPostColumn post={lastPost} />*/}
-        <ThreadsColumn />
-        <VotesColumn />
+{/*         <ThreadsColumn />
+        <VotesColumn /> */}
     </tr>
   )
 }
