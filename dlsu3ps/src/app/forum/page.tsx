@@ -1,7 +1,6 @@
 import React from 'react';
 import prisma from '../lib/prisma';
 import TopicBox from '@/components/Topics/TopicBox'
-
 const getTopicsAndSubtopics = async () => {
     try {
         const topics = await prisma.topic.findMany({

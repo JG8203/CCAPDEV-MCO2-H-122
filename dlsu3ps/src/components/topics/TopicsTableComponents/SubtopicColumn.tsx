@@ -1,4 +1,4 @@
-import Link from '../../../../node_modules/next/link'
+import Link from 'next/link'
 import { Subtopic, Topic } from '../../../app/api/topics.types'
 
 //export default function LatestPostColumn({subtopic}: {subtopic: Subtopic}) {
