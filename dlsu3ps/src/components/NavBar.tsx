@@ -4,8 +4,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "@/app/lib/prisma";
 import SearchBar from "@/components/SearchBar";
 import Image from "next/image";
-import React from "react";
-import SearchList from "@/components/Forum/SearchList";
+import React, { Suspense } from "react";
+
 export default async function NavBar() {
     const { isAuthenticated, getUser } = getKindeServerSession();
     const currentUser = await getUser();
@@ -36,7 +36,9 @@ export default async function NavBar() {
                     />
                     <h1 className="m-0 pl-2 text-3xl font-bold">DLSU3PS</h1>
                 </Link>
-                <SearchBar></SearchBar>
+                <Suspense>
+                    <SearchBar />
+                </Suspense>
 
             <nav className="flex">
                 <Link href="/about" className="text-beige no-underline mx-5 hover:text-gray-800">About</Link>

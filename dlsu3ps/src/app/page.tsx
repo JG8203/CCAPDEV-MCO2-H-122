@@ -1,6 +1,4 @@
 import Image from 'next/image';
-import SearchList from "@/components/Forum/SearchList";
-import {useSearchParams, usePathname, useRouter} from "next/navigation";
 
 export default function LandingPage() {
 
